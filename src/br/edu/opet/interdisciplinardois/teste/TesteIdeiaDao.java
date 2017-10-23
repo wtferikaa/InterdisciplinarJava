@@ -182,6 +182,45 @@ class TesteIdeiaDao {
 				for (Ideia tIdeia : tLista) {
 					System.out.println("OK...... : " + tIdeia);
 				}
+				
+				// pesquisar as ideias por nome
+		        tLista = tDao.searchByNome(tIdeia2a.getNome());
+		        System.out.println();
+		        System.out.println("Pesquisando por nome");
+		        for (Ideia tIdeia : tLista)
+		        {
+		            System.out.println("OK...... : " + tIdeia);
+		        }
+		        
+				// pesquisar as ideias por aluno
+		        tLista = tDao.searchByIdAluno(tAluno2a.getId());
+		        System.out.println();
+		        System.out.println("Pesquisando por aluno");
+		        for (Ideia tIdeia : tLista)
+		        {
+		            System.out.println("OK...... : " + tIdeia);
+		        }
+		        
+		     // pesquisar as ideias por departamento
+		        tLista = tDao.searchByIdDepartamentosOpet(tDepartamentosOpet2a.getId());
+		        System.out.println();
+		        System.out.println("Pesquisando por departamento");
+		        for (Ideia tIdeia : tLista)
+		        {
+		            System.out.println("OK...... : " + tIdeia);
+		        }
+		        
+				// Contar as ideias por aluno
+		        int tQtde = tDao.countByAluno(tAluno2a.getId());
+		        System.out.println();
+		        System.out.println("Contando as ideias por aluno");
+		        System.out.println("OK...... : " + tQtde);
+		        
+		     // Contar as ideias por departamento
+		        int tQtdeDepartamento = tDao.countByDepartamento(tDepartamentosOpet2a.getId());
+		        System.out.println();
+		        System.out.println("Contando as ideias por departamento");
+		        System.out.println("OK...... : " + tQtdeDepartamento);
 					
 					// Remover a ideia
 					System.out.println();

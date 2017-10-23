@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import br.edu.opet.interdisciplinardois.jdbc.Conexao;
 import br.edu.opet.interdisciplinardois.model.Aluno;
 import br.edu.opet.interdisciplinardois.util.ExceptionUtil;
@@ -34,6 +35,9 @@ public class AlunoDao {
 	private String comandoSearchByCurso = "SELECT ID, EMAIL, SENHA, NOME, TELEFONE, TURNO, TURMA, ID_CURSO "
 			                      + "FROM ALUNO " 
 			                      + "WHERE ID_CURSO = ? ";
+	private String comandoSearchByNome = "SELECT ID, EMAIL, SENHA, NOME, TELEFONE, TURNO, TURMA, ID_CURSO "
+            + "FROM ALUNO "
+            + "WHERE UPPER(NOME) LIKE UPPER(?)";
 
 	public Aluno create(Aluno pAluno) {
 		try {
@@ -259,6 +263,53 @@ public class AlunoDao {
 		// Retornando a lista de objetos
 		return tLista;
 	}
+	
+	public List<Aluno> searchByNome(String pNome)
+    {
+        if (pNome == null || pNome.isEmpty())
+            return search();
+
+        List<Aluno> tLista = new ArrayList<>();
+
+        try
+        {
+            // Preparando o nome para pesquisa
+            String tNome = "%" + pNome + "%";
+
+            // Obter a conexão
+            Connection tConexao = Conexao.getConexao();
+
+            // Criar o comando
+            PreparedStatement tComandoJdbc = tConexao.prepareStatement(comandoSearchByNome);
+
+            // Preencher o comando
+            int i = 1;
+            tComandoJdbc.setString(i++, tNome);
+
+            // Executar o comando
+            ResultSet tResultSet = tComandoJdbc.executeQuery();
+
+            // Processar o resultado
+            while (tResultSet.next())
+            {
+                Aluno tAluno = recuperarAluno(tResultSet);
+
+                // Adicionar o o bjeto na lista
+                tLista.add(tAluno);
+            }
+
+            // Liberar os recursos
+            tResultSet.close();
+            tComandoJdbc.close();
+        }
+        catch (SQLException tExcept)
+        {
+            ExceptionUtil.mostrarErro(tExcept, "Problemas na pesquisa dos alunos por nome");
+        }
+
+        // Retornando a lista de objetos
+        return tLista;
+    }
 
 	private Aluno recuperarAluno(ResultSet tResultSet) throws SQLException {
 		Aluno tAluno = new Aluno();

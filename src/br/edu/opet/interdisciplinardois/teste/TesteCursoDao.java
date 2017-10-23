@@ -90,6 +90,16 @@ class TesteCursoDao {
 		for (Curso tCurso : tLista) {
 			System.out.println("OK...... : " + tCurso);
 		}
+		
+		// pesquisar os cursos por nome
+        tLista = tDao.searchByNome(tCurso2a.getNome());
+        System.out.println();
+        System.out.println("Pesquisando por nome");
+        for (Curso tCurso : tLista)
+        {
+            System.out.println("OK...... : " + tCurso);
+        }
+        
 
 		// Remover os dois Cursos
 		System.out.println();

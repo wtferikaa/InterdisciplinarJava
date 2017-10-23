@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import br.edu.opet.interdisciplinardois.jdbc.Conexao;
 import br.edu.opet.interdisciplinardois.model.Ideia;
 import br.edu.opet.interdisciplinardois.util.ExceptionUtil;
@@ -41,6 +42,25 @@ public class IdeiaDao {
 		private String comandoSearch = "SELECT ID, NOME, DESCRICAODOPROBLEMA, RECOMENDACAO, DATACADASTRO, "
 				                     + "DATAANALISE, APROVADO, RESPOSTA, ID_ALUNO, ID_DEPARTAMENTOSOPET "
 				                     + "FROM IDEIA";
+	   private String comandoSearchByAluno   = "SELECT ID, NOME, DESCRICAODOPROBLEMA, RECOMENDACAO, DATACADASTRO, "
+	   		     + " DATAANALISE, APROVADO, RESPOSTA, ID_ALUNO, ID_DEPARTAMENTOSOPET "
+                 + "FROM IDEIA "
+                 + "WHERE ID_ALUNO = ?";
+         private String comandoCountByAluno   = "SELECT COUNT(ID_ALUNO) "
+                 + "FROM IDEIA "
+                 + "WHERE ID_ALUNO = ?";
+         private String comandoSearchByDepartamento   = "SELECT ID, NOME, DESCRICAODOPROBLEMA, RECOMENDACAO, DATACADASTRO, "
+	   		     + " DATAANALISE, APROVADO, RESPOSTA, ID_ALUNO, ID_DEPARTAMENTOSOPET "
+                 + "FROM IDEIA "
+                 + "WHERE ID_DEPARTAMENTOSOPET = ?";
+         private String comandoCountByDepartamento   = "SELECT COUNT(ID_DEPARTAMENTOSOPET) "
+                 + "FROM IDEIA "
+                 + "WHERE ID_DEPARTAMENTOSOPET = ?";
+         private String comandoSearchByNome = "SELECT ID, NOME, DESCRICAODOPROBLEMA, RECOMENDACAO, DATACADASTRO, "
+         		 + " DATAANALISE, APROVADO, RESPOSTA, ID_ALUNO, ID_DEPARTAMENTOSOPET "
+                 + "FROM IDEIA "
+                 + "WHERE UPPER(NOME) LIKE UPPER(?)";
+		
 
 		public Ideia create(Ideia pIdeia) {
 			try {
@@ -234,6 +254,211 @@ public class IdeiaDao {
 			// Retornando a lista de objetos
 			return tLista;
 		}
+		
+		
+		 public List<Ideia> searchByIdAluno(int pIdAluno)
+		    {
+		        List<Ideia> tLista = new ArrayList<>();
+
+		        try
+		        {
+		            // Obter a conexão
+		            Connection tConexao = Conexao.getConexao();
+
+		            // Criar o comando
+		            PreparedStatement tComandoJdbc = tConexao.prepareStatement(comandoSearchByAluno);
+
+		            // Preencher o comando
+		            int i = 1;
+		            tComandoJdbc.setInt(i++, pIdAluno);
+
+		            // Executar o comando
+		            ResultSet tResultSet = tComandoJdbc.executeQuery();
+
+		            // Processar o resultado
+		            while (tResultSet.next())
+		            {
+		                Ideia tIdeia = recuperarIdeia(tResultSet);
+
+		                // Adicionar o o bjeto na lista
+		                tLista.add(tIdeia);
+		            }
+
+		            // Liberar os recursos
+		            tResultSet.close();
+		            tComandoJdbc.close();
+		        }
+		        catch (SQLException tExcept)
+		        {
+		            ExceptionUtil.mostrarErro(tExcept, "Problemas na pesquisa das ideias por Aluno");
+		        }
+
+		        // Retornando a lista de objetos
+		        return tLista;
+		    }
+		 
+		 public int countByAluno(int pIdAluno)
+		    {
+		        int tQtde = 0;
+
+		        try
+		        {
+		            // Obter a conexão
+		            Connection tConexao = Conexao.getConexao();
+
+		            // Criar o comando
+		            PreparedStatement tComandoJdbc = tConexao.prepareStatement(comandoCountByAluno);
+
+		            // Preencher o comando
+		            int i = 1;
+		            tComandoJdbc.setInt(i++, pIdAluno);
+
+		            // Executar o comando
+		            ResultSet tResultSet = tComandoJdbc.executeQuery();
+
+		            // Processar o resultado
+		            tResultSet.next();
+		            tQtde = tResultSet.getInt(1);
+
+		            // Liberar os recursos
+		            tResultSet.close();
+		            tComandoJdbc.close();
+
+		        }
+		        catch (SQLException tExcept)
+		        {
+		            ExceptionUtil.mostrarErro(tExcept, "Problemas na contagem das ideias por aluno");
+		        }
+
+		        // Retornando a lista de objetos
+		        return tQtde;
+		    }
+		 
+		 public List<Ideia> searchByIdDepartamentosOpet(int pIdDepartamentosOpet)
+		    {
+		        List<Ideia> tLista = new ArrayList<>();
+
+		        try
+		        {
+		            // Obter a conexão
+		            Connection tConexao = Conexao.getConexao();
+
+		            // Criar o comando
+		            PreparedStatement tComandoJdbc = tConexao.prepareStatement(comandoSearchByDepartamento);
+
+		            // Preencher o comando
+		            int i = 1;
+		            tComandoJdbc.setInt(i++, pIdDepartamentosOpet);
+
+		            // Executar o comando
+		            ResultSet tResultSet = tComandoJdbc.executeQuery();
+
+		            // Processar o resultado
+		            while (tResultSet.next())
+		            {
+		               Ideia tIdeia = recuperarIdeia(tResultSet);
+
+		                // Adicionar o o bjeto na lista
+		                tLista.add(tIdeia);
+		            }
+
+		            // Liberar os recursos
+		            tResultSet.close();
+		            tComandoJdbc.close();
+		        }
+		        catch (SQLException tExcept)
+		        {
+		            ExceptionUtil.mostrarErro(tExcept, "Problemas na pesquisa das ideias por departamento");
+		        }
+		     // Retornando a lista de objetos
+		        return tLista;
+		    }
+		 
+		 public int countByDepartamento(int pIdDepartamentosOpet)
+		    {
+		        int tQtde = 0;
+
+		        try
+		        {
+		            // Obter a conexão
+		            Connection tConexao = Conexao.getConexao();
+
+		            // Criar o comando
+		            PreparedStatement tComandoJdbc = tConexao.prepareStatement(comandoCountByDepartamento);
+
+		            // Preencher o comando
+		            int i = 1;
+		            tComandoJdbc.setInt(i++, pIdDepartamentosOpet);
+
+		            // Executar o comando
+		            ResultSet tResultSet = tComandoJdbc.executeQuery();
+
+		            // Processar o resultado
+		            tResultSet.next();
+		            tQtde = tResultSet.getInt(1);
+
+		            // Liberar os recursos
+		            tResultSet.close();
+		            tComandoJdbc.close();
+
+		        }
+		        catch (SQLException tExcept)
+		        {
+		            ExceptionUtil.mostrarErro(tExcept, "Problemas na contagem das ideias por departamento");
+		        }
+
+		        // Retornando a lista de objetos
+		        return tQtde;
+		    }
+		 
+		 public List<Ideia> searchByNome(String pNome)
+		    {
+		        if (pNome == null || pNome.isEmpty())
+		            return search();
+
+		        List<Ideia> tLista = new ArrayList<>();
+
+		        try
+		        {
+		            // Preparando o nome para pesquisa
+		            String tNome = "%" + pNome + "%";
+
+		            // Obter a conexão
+		            Connection tConexao = Conexao.getConexao();
+
+		            // Criar o comando
+		            PreparedStatement tComandoJdbc = tConexao.prepareStatement(comandoSearchByNome);
+
+		            // Preencher o comando
+		            int i = 1;
+		            tComandoJdbc.setString(i++, tNome);
+
+		            // Executar o comando
+		            ResultSet tResultSet = tComandoJdbc.executeQuery();
+
+		            // Processar o resultado
+		            while (tResultSet.next())
+		            {
+		                Ideia tIdeia = recuperarIdeia(tResultSet);
+
+		                // Adicionar o o bjeto na lista
+		                tLista.add(tIdeia);
+		            }
+
+		            // Liberar os recursos
+		            tResultSet.close();
+		            tComandoJdbc.close();
+		        }
+		        catch (SQLException tExcept)
+		        {
+		            ExceptionUtil.mostrarErro(tExcept, "Problemas na pesquisa das ideias por nome");
+		        }
+
+		        // Retornando a lista de objetos
+		        return tLista;
+		    }
+
+		 
 
 		private Ideia recuperarIdeia(ResultSet tResultSet) throws SQLException {
 			Ideia tIdeia = new Ideia();

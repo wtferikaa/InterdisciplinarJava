@@ -34,6 +34,9 @@ public class DepartamentosOpetDao {
 			                     + "WHERE ID = ?";
 	private String comandoSearch = "SELECT ID, EMAIL, SENHA, NOME "
 			                     + "FROM DEPARTAMENTOSOPET";
+	private String comandoSearchByNome = "SELECT ID, EMAIL, SENHA, NOME "
+            + "FROM DEPARTAMENTOSOPET "
+            + "WHERE UPPER(NOME) LIKE UPPER(?)";
 
 	public DepartamentosOpet create(DepartamentosOpet pDepartamentosOpet) {
 		try {
@@ -249,6 +252,54 @@ public class DepartamentosOpetDao {
 		// Retornando a lista de objetos
 		return tLista;
 	}
+	
+	public List<DepartamentosOpet> searchByNome(String pNome)
+    {
+        if (pNome == null || pNome.isEmpty())
+            return search();
+
+        List<DepartamentosOpet> tLista = new ArrayList<>();
+
+        try
+        {
+            // Preparando o nome para pesquisa
+            String tNome = "%" + pNome + "%";
+
+            // Obter a conexão
+            Connection tConexao = Conexao.getConexao();
+
+            // Criar o comando
+            PreparedStatement tComandoJdbc = tConexao.prepareStatement(comandoSearchByNome);
+
+            // Preencher o comando
+            int i = 1;
+            tComandoJdbc.setString(i++, tNome);
+
+            // Executar o comando
+            ResultSet tResultSet = tComandoJdbc.executeQuery();
+
+            // Processar o resultado
+            while (tResultSet.next())
+            {
+                DepartamentosOpet tDepartamentosOpet = recuperarDepartamentosOpet(tResultSet);
+
+                // Adicionar o o bjeto na lista
+                tLista.add(tDepartamentosOpet);
+            }
+
+            // Liberar os recursos
+            tResultSet.close();
+            tComandoJdbc.close();
+        }
+        catch (SQLException tExcept)
+        {
+            ExceptionUtil.mostrarErro(tExcept, "Problemas na pesquisa dos departamentos por nome");
+        }
+
+        // Retornando a lista de objetos
+        return tLista;
+    }
+
 
 	private DepartamentosOpet recuperarDepartamentosOpet(ResultSet tResultSet) throws SQLException {
 		DepartamentosOpet tDepartamentosOpet = new DepartamentosOpet();

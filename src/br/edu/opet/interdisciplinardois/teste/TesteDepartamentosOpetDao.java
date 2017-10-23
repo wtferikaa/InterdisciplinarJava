@@ -6,6 +6,7 @@ import java.util.List;
 import br.edu.opet.interdisciplinardois.dao.DepartamentosOpetDao;
 import br.edu.opet.interdisciplinardois.model.DepartamentosOpet;
 
+
 public class TesteDepartamentosOpetDao {
 
 	public static void main(String[] pArgs) {
@@ -86,6 +87,16 @@ public class TesteDepartamentosOpetDao {
 		for (DepartamentosOpet tDepartamentosOpet : tLista) {
 			System.out.println("OK...... : " + tDepartamentosOpet);
 		}
+		
+		// Pesquisar os departamentos por nome
+        tLista = tDao.searchByNome(tDepartamentosOpet2a.getNome());
+        System.out.println();
+        System.out.println("Pesquisando por nome");
+        for (DepartamentosOpet tDepartamentosOpet : tLista)
+        {
+            System.out.println("OK...... : " + tDepartamentosOpet);
+        }
+        
 
 		// Remover o DepartamentosOpet
 		System.out.println();

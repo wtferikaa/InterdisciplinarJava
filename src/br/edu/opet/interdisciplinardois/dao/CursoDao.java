@@ -33,6 +33,9 @@ public class CursoDao {
 			                     + "WHERE ID = ?";
 	private String comandoSearch = "SELECT ID, EMAIL, SENHA, NOME, NOMECOORDENADOR " 
 			                     + "FROM CURSO";
+	private String comandoSearchByNome = "SELECT ID, EMAIL, SENHA, NOME, NOMECOORDENADOR "
+            + "FROM CURSO "
+            + "WHERE UPPER(NOME) LIKE UPPER(?)";
 
 	public Curso create(Curso pCurso) {
 		try {
@@ -252,6 +255,53 @@ public class CursoDao {
 		return tLista;
 	}
 	
+	public List<Curso> searchByNome(String pNome)
+    {
+        if (pNome == null || pNome.isEmpty())
+            return search();
+
+        List<Curso> tLista = new ArrayList<>();
+
+        try
+        {
+            // Preparando o nome para pesquisa
+            String tNome = "%" + pNome + "%";
+
+            // Obter a conexão
+            Connection tConexao = Conexao.getConexao();
+
+            // Criar o comando
+            PreparedStatement tComandoJdbc = tConexao.prepareStatement(comandoSearchByNome);
+
+            // Preencher o comando
+            int i = 1;
+            tComandoJdbc.setString(i++, tNome);
+
+            // Executar o comando
+            ResultSet tResultSet = tComandoJdbc.executeQuery();
+
+            // Processar o resultado
+            while (tResultSet.next())
+            {
+               Curso tCurso = recuperarCurso(tResultSet);
+
+                // Adicionar o o bjeto na lista
+                tLista.add(tCurso);
+            }
+
+            // Liberar os recursos
+            tResultSet.close();
+            tComandoJdbc.close();
+        }
+        catch (SQLException tExcept)
+        {
+            ExceptionUtil.mostrarErro(tExcept, "Problemas na pesquisa dos cursos por nome");
+        }
+
+        // Retornando a lista de objetos
+        return tLista;
+    }
+
 
 	private Curso recuperarCurso(ResultSet tResultSet) throws SQLException {
 		Curso tCurso = new Curso();

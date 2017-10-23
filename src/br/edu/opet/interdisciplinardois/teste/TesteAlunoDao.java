@@ -124,6 +124,16 @@ class TesteAlunoDao {
 		for (Aluno tAluno : tLista) {
 			System.out.println("OK...... : " + tAluno);
 		}
+		
+		// pesquisar os alunos por nome
+        tLista = tDao.searchByNome(tAluno2a.getNome());
+        System.out.println();
+        System.out.println("Pesquisando por nome");
+        for (Aluno tAluno : tLista)
+        {
+            System.out.println("OK...... : " + tAluno);
+        }
+        
 
 		//Pesquisando por curso 
 		tLista = tDao.searchByIdCurso(tCurso2a.getId());
