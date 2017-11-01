@@ -111,11 +111,11 @@ public class CursoController {
         // Criando o objeto de persistência
         AlunoDao tDaoAluno = new AlunoDao();
 
-        // Verificando se o paciente já existe
+        // Verificando se o aluno já existe
         int tQtde = tDaoAluno.countByCurso(pId);
         if (tQtde != 0)
         {
-            return new CursoDto(false, "Curso já tem alunos no sistema. Remoção proíbida");
+            return new CursoDto(false, "Não é possivel remover o curso, aluno já está cadastrado no curso. Remoção proíbida");
         }
 
         // Criando o objeto de persistência

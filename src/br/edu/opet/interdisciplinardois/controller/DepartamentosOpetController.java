@@ -5,7 +5,6 @@ import java.util.List;
 
 import br.edu.opet.interdisciplinardois.dao.DepartamentosOpetDao;
 import br.edu.opet.interdisciplinardois.dao.IdeiaDao;
-import br.edu.opet.interdisciplinardois.dao.CursoDao;
 import br.edu.opet.interdisciplinardois.dto.DepartamentosOpetDto;
 import br.edu.opet.interdisciplinardois.model.DepartamentosOpet;
 
@@ -45,7 +44,7 @@ public class DepartamentosOpetController {
         // Verificar as informações
         if (pId <= 0)
         {
-            return new DepartamentosOpetDto(false, "Identificador do curso inválido");
+            return new DepartamentosOpetDto(false, "Identificador do departamento inválido");
         }
 
         // Criando o objeto de persistência
@@ -80,7 +79,7 @@ public class DepartamentosOpetController {
             return new DepartamentosOpetDto(false, "Não existe departamento com o identificador informado");
         }
 
-        if (pDepartamentosOpet.getNome() != tDepartamentosOpet.getNome())
+        if (!pDepartamentosOpet.getNome().equals(tDepartamentosOpet.getNome()))
         {
             // Verificando se existe um paciente com o novo nome
             tDepartamentosOpet = tDao.recoveryByNome(pDepartamentosOpet.getNome());
@@ -112,7 +111,7 @@ public class DepartamentosOpetController {
         // Criando o objeto de persistência
         IdeiaDao tDaoIdeia = new IdeiaDao();
 
-        // Verificando se o paciente já existe
+        // Verificando se o departamento já existe na ideia
         int tQtde = tDaoIdeia.countByDepartamento(pId);
         if (tQtde != 0)
         {
@@ -120,9 +119,9 @@ public class DepartamentosOpetController {
         }
 
         // Criando o objeto de persistência
-        CursoDao tDao = new CursoDao();
+        DepartamentosOpetDao tDao = new DepartamentosOpetDao();
 
-        // Incluindo o paciente
+        // Incluindo o departamento
         if (tDao.delete(pId))
         {
             // Retornando o indicativo de sucesso
