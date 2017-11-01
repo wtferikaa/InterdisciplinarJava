@@ -1,5 +1,6 @@
 package br.edu.opet.interdisciplinardois.model;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 public class Ideia {
@@ -14,6 +15,7 @@ public class Ideia {
 	private String resposta;
 	private int idAluno;
 	private int idDepartamentosOpet;
+	
 	
 	
     //Construtores
@@ -80,7 +82,7 @@ public class Ideia {
 
 
 	public LocalDate getDataCadastro() {
-		return dataCadastro;
+		return LocalDate.now();
 	}
 
 

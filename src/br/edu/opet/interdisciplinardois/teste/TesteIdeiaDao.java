@@ -95,8 +95,8 @@ class TesteIdeiaDao {
 				
 				//
 				// Criar uma Ideia 
-				Ideia tIdeiaA = new Ideia(0, "ideia 1", "problema 1", "resolver o problema 1", LocalDate.of(2017, 10, 21), LocalDate.of(2017, 10, 29), true, "resposta 1", tAluno2a.getId(), tDepartamentosOpet2a.getId());
-				Ideia tIdeiaB = new Ideia(0, "ideia 2", "problema 2", "resolver o problema 2", LocalDate.of(2017, 10, 22), LocalDate.of(2017, 10, 30), true, "resposta 2", tAluno2b.getId(), tDepartamentosOpet2b.getId());
+				Ideia tIdeiaA = new Ideia(0, "ideia 1", "problema 1", "resolver o problema 1", LocalDate.now(), LocalDate.of(2017, 10, 29), true, "resposta 1", tAluno2a.getId(), tDepartamentosOpet2a.getId());
+				Ideia tIdeiaB = new Ideia(0, "ideia 2", "problema 2", "resolver o problema 2", LocalDate.now(), LocalDate.of(2017, 10, 30), true, "resposta 2", tAluno2b.getId(), tDepartamentosOpet2b.getId());
 
 				// Criando o objeto de persistência
 				IdeiaDao tDao = new IdeiaDao();
@@ -135,7 +135,7 @@ class TesteIdeiaDao {
 		        tIdeia2a.setNome("Ideia 1.1");
 		        tIdeia2a.setDescricaoProblema("problema 1.1");
 		        tIdeia2a.setRecomendacao("resolver o problema 1.1");
-		        tIdeia2a.setDataCadastro(LocalDate.of(2017, 10, 25));
+		        tIdeia2a.setDataCadastro(LocalDate.now());
 		        tIdeia2a.setDataAnalise(LocalDate.of(2017, 10, 30));
 		        tIdeia2a.setAprovado(false);
 		        tIdeia2a.setResposta("Resposta 1.1");
@@ -149,7 +149,7 @@ class TesteIdeiaDao {
 				tIdeia2b.setNome("Ideia 2.1");
 				tIdeia2b.setDescricaoProblema("Problema 2.1");
 				tIdeia2b.setRecomendacao("resolver o problema 2.1");
-				tIdeia2a.setDataCadastro(LocalDate.of(2017, 11, 1));
+				tIdeia2a.setDataCadastro(LocalDate.now());
 		        tIdeia2a.setDataAnalise(LocalDate.of(2017, 11, 5));
 				tIdeia2b.setAprovado(false);
 				tIdeia2b.setResposta("Resposta 2.1");

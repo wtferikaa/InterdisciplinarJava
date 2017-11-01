@@ -35,6 +35,9 @@ public class AlunoDao {
 	private String comandoSearchByCurso = "SELECT ID, EMAIL, SENHA, NOME, TELEFONE, TURNO, TURMA, ID_CURSO "
 			                      + "FROM ALUNO " 
 			                      + "WHERE ID_CURSO = ? ";
+	 private String comandoCountByCurso   = "SELECT COUNT(ID) "
+             + "FROM CURSO "
+             + "WHERE ID= ?";
 	private String comandoSearchByNome = "SELECT ID, EMAIL, SENHA, NOME, TELEFONE, TURNO, TURMA, ID_CURSO "
             + "FROM ALUNO "
             + "WHERE UPPER(NOME) LIKE UPPER(?)";
@@ -227,6 +230,43 @@ public class AlunoDao {
 		// Retornando a lista de objetos
 		return tLista;
 	}
+	
+	public int countByCurso(int pIdCurso)
+    {
+        int tQtde = 0;
+
+        try
+        {
+            // Obter a conexão
+            Connection tConexao = Conexao.getConexao();
+
+            // Criar o comando
+            PreparedStatement tComandoJdbc = tConexao.prepareStatement(comandoCountByCurso);
+
+            // Preencher o comando
+            int i = 1;
+            tComandoJdbc.setInt(i++, pIdCurso);
+
+            // Executar o comando
+            ResultSet tResultSet = tComandoJdbc.executeQuery();
+
+            // Processar o resultado
+            tResultSet.next();
+            tQtde = tResultSet.getInt(1);
+
+            // Liberar os recursos
+            tResultSet.close();
+            tComandoJdbc.close();
+
+        }
+        catch (SQLException tExcept)
+        {
+            ExceptionUtil.mostrarErro(tExcept, "Problemas na contagem dos alunos por Curso");
+        }
+
+        // Retornando a lista de objetos
+        return tQtde;
+    }
 
 	public List<Aluno> searchByIdCurso(int pIdCurso) {
 		List<Aluno> tLista = new ArrayList<>();
