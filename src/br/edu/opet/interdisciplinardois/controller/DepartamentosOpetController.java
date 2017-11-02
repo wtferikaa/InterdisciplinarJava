@@ -72,7 +72,7 @@ public class DepartamentosOpetController {
         // Criando o objeto de persistência
        DepartamentosOpetDao tDao = new DepartamentosOpetDao();
 
-        // Recuperando o paciente
+        // Recuperando o departamento
         DepartamentosOpet tDepartamentosOpet = tDao.recovery(pDepartamentosOpet.getId());
         if (tDepartamentosOpet == null)
         {

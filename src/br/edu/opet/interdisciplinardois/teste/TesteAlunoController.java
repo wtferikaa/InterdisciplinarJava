@@ -2,6 +2,7 @@ package br.edu.opet.interdisciplinardois.teste;
 
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.util.List;
 
 import br.edu.opet.interdisciplinardois.controller.AlunoController;
 
@@ -119,7 +120,7 @@ public class TesteAlunoController {
 				System.out.println("ERRO.... : " + tDto.getMensagem());
 			}
 
-			// Recuperar o departamento
+			// Recuperar o aluno
 			System.out.println();
 			System.out.println("Recuperando um aluno via controller");
 			tDto = tController.recuperarAluno(tAlunoB.getId());
@@ -168,7 +169,7 @@ public class TesteAlunoController {
 			// Acertando o id para a atualização
 			tAlunoB.setNome("Departamento com nome que já existe");
 
-			// Atualizando o departamento
+			// Atualizando o aluno
 			System.out.println();
 			System.out.println("Atualizando um departamento via controller");
 			tDto = tController.atualizarAluno(tAlunoB);
@@ -200,7 +201,7 @@ public class TesteAlunoController {
 				System.out.println("ERRO.... : " + tDto.getMensagem());
 			}
 
-			// Recuperar o departamento
+			// Recuperar o aluno
 			System.out.println();
 			System.out.println("Recuperando um aluno via controller");
 			tDto = tController.recuperarAluno(tAlunoB.getId());
@@ -210,6 +211,42 @@ public class TesteAlunoController {
 			} else {
 				System.out.println("ERRO.... : " + tDto.getMensagem());
 			}
+			
+			// Recuperando os alunos por curso
+	        System.out.println();
+	        System.out.println("Recuperando os alunos por curso");
+	        tDto = tController.pesquisarAlunoPorCurso(tCurso2a.getId());
+	        if (tDto.isOk())
+	        {
+	            System.out.println("OK...... : " + tDto.getMensagem());
+	            List<Aluno> tLista = tDto.getLista();
+	            for (Aluno tIdeia : tLista)
+	            {
+	                System.out.println("         : " + tIdeia);
+	            }
+	        }
+	        else
+	        {
+	            System.out.println("ERRO.... : " + tDto.getMensagem());
+	        }
+
+	        // Recuperando os alunos por nome
+	        System.out.println();
+	        System.out.println("Recuperando os alunos por nome");
+	        tDto = tController.pesquisarAlunosPorNome(tAluno2a.getNome());
+	        if (tDto.isOk())
+	        {
+	            System.out.println("OK...... : " + tDto.getMensagem());
+	            List<Aluno> tLista = tDto.getLista();
+	            for (Aluno tIdeia : tLista)
+	            {
+	                System.out.println("         : " + tIdeia);
+	            }
+	        }
+	        else
+	        {
+	            System.out.println("ERRO.... : " + tDto.getMensagem());
+	        }
 
 			// Removendo o paciente
 			System.out.println();

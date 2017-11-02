@@ -59,7 +59,7 @@ public class IdeiaDto {
         mensagem = pMensagem;
     }
 
-    public Ideia getMedico()
+    public Ideia getIdeia()
     {
         return ideia;
     }

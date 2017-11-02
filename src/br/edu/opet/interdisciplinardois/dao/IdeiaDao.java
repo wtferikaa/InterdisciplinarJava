@@ -11,6 +11,7 @@ import java.util.List;
 
 
 import br.edu.opet.interdisciplinardois.jdbc.Conexao;
+
 import br.edu.opet.interdisciplinardois.model.Ideia;
 import br.edu.opet.interdisciplinardois.util.ExceptionUtil;
 
@@ -26,6 +27,10 @@ public class IdeiaDao {
 				                     + " DATAANALISE, APROVADO, RESPOSTA, ID_ALUNO, ID_DEPARTAMENTOSOPET "
 				                     + "FROM IDEIA "
 				                     + "WHERE ID = ?";
+		private String comandoRecoveryByNome = "SELECT ID, NOME, DESCRICAODOPROBLEMA, RECOMENDACAO, DATACADASTRO, "
+				+ "DATAANALISE, APROVADO, RESPOSTA, ID_ALUNO, ID_DEPARTAMENTOSOPET "
+	            + "FROM IDEIA "
+	            + "WHERE NOME = ?";
 		private String comandoUpdate = "UPDATE IDEIA " 
 				                     + "SET NOME = ?, " 
 				                     + "DESCRICAODOPROBLEMA = ?, " 
@@ -142,6 +147,41 @@ public class IdeiaDao {
 				}
 			} catch (SQLException tExcept) {
 				ExceptionUtil.mostrarErro(tExcept, "Problemas na recuperação do Ideia");
+			}
+
+			// Retorna null indicando algum erro de processamento
+			return null;
+		}
+		
+		public Ideia recoveryByNome(String pNome) {
+			try {
+				// Obter a conexão
+				Connection tConexao = Conexao.getConexao();
+
+				// Criar o comando
+				PreparedStatement tComandoJdbc = tConexao.prepareStatement(comandoRecoveryByNome);
+
+				// Preencher o comando
+				int i = 1;
+				tComandoJdbc.setString(i++, pNome);
+
+				// Executar o comando
+				ResultSet tResultSet = tComandoJdbc.executeQuery();
+
+				// Processar o resultado
+				if (tResultSet.next()) {
+					// Criando o objeto
+					Ideia tIdeia = recuperarIdeia(tResultSet);
+
+					// Liberar os recursos
+					tResultSet.close();
+					tComandoJdbc.close();
+
+					// Retornando o objeto inserido
+					return tIdeia;
+				}
+			} catch (SQLException tExcept) {
+				ExceptionUtil.mostrarErro(tExcept, "Problemas na recuperação de ideia por Nome");
 			}
 
 			// Retorna null indicando algum erro de processamento

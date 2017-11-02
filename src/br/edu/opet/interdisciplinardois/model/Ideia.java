@@ -1,6 +1,7 @@
 package br.edu.opet.interdisciplinardois.model;
 
-import java.sql.Date;
+
+
 import java.time.LocalDate;
 
 public class Ideia {
@@ -82,12 +83,12 @@ public class Ideia {
 
 
 	public LocalDate getDataCadastro() {
-		return LocalDate.now();
+		return dataCadastro;
 	}
 
 
 	public void setDataCadastro(LocalDate pDataCadastro) {
-		dataCadastro = pDataCadastro;
+		 dataCadastro = pDataCadastro;
 	}
 
 
@@ -146,6 +147,8 @@ public class Ideia {
 	
 	@Override
 	public String toString() {
+		
+		
 		StringBuilder tBuilder = new StringBuilder();
 		tBuilder.append("[");
 		tBuilder.append(getId());

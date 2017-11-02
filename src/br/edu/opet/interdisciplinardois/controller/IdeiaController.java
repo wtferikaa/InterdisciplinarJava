@@ -7,6 +7,7 @@ import java.util.List;
 import br.edu.opet.interdisciplinardois.dao.AlunoDao;
 import br.edu.opet.interdisciplinardois.dao.DepartamentosOpetDao;
 import br.edu.opet.interdisciplinardois.dao.IdeiaDao;
+
 import br.edu.opet.interdisciplinardois.dto.IdeiaDto;
 import br.edu.opet.interdisciplinardois.model.Aluno;
 import br.edu.opet.interdisciplinardois.model.DepartamentosOpet;
@@ -15,7 +16,7 @@ import br.edu.opet.interdisciplinardois.model.Ideia;
 
 public class IdeiaController {
 
-	  public IdeiaDto DataCadastro(Ideia pIdeia)
+	  public IdeiaDto criarIdeia(Ideia pIdeia)
 	    {
 		  
 		// Verificar as informações
@@ -59,7 +60,7 @@ public class IdeiaController {
 	        return new IdeiaDto(true, "Ideia incluída com sucesso", tIdeia);
 	    }
 
-	    public IdeiaDto verificarIdeia(int pIdIdeia)
+	    public IdeiaDto recuperarIdeia(int pIdIdeia)
 	    {
 	        // Verificar as informações
 	        if (pIdIdeia <= 0)
@@ -83,32 +84,43 @@ public class IdeiaController {
 	    
 	    public IdeiaDto atualizarIdeia(Ideia pIdeia)
 	    {
-	        // Verificar as informações
-	        if (pIdeia == null)
-	        {
-	            return new IdeiaDto(false, "Tentativa de atualização de ideia nula");
-	        }
+	    	 // Verificar as informações
+            if (pIdeia == null)
+            {
+                return new IdeiaDto(false, "Tentativa de atualização de ideia nula");
+            }
 
-	        // Criando o objeto de persistência
-	        IdeiaDao tDao = new IdeiaDao();
+            // Criando o objeto de persistência
+           IdeiaDao tDao = new IdeiaDao();
 
-	        // Verificando se existe uma ideia
-	       Ideia tIdeia = tDao.recovery(pIdeia.getId());
-	        if (tIdeia != null)
-	        {
-	            return new IdeiaDto(false, "Já existe ideia com o identificador informado");
-	        }
+            // Recuperando o aluno
+            Ideia tIdeia = tDao.recovery(pIdeia.getId());
+            if (tIdeia == null)
+            {
+                return new IdeiaDto(false, "Não existe ideia com o identificador informado");
+            }
 
-	        // Atualizando a ideia
-	        tIdeia = tDao.update(pIdeia);
-	        if (tIdeia == null)
-	        {
-	            return new IdeiaDto(false, "Não existe ideia com o identificador informado");
-	        }
+            if (!pIdeia.getNome().equals(tIdeia.getNome()))
+            {
+                // Verificando se existe um paciente com o novo nome
+                tIdeia = tDao.recoveryByNome(pIdeia.getNome());
+                if (tIdeia != null)
+                {
+                    return new IdeiaDto(false, "Já existe ideia com o nome informado");
+                }
+            }
 
-	        // Retornando o indicativo de sucesso
-	        return new IdeiaDto(true, "Ideia alterada com sucesso", tIdeia);
-	    }
+            //Atualizando a ideia
+            tIdeia = tDao.update(pIdeia);
+            if (tIdeia == null)
+            {
+                return new IdeiaDto(false, "Não existe ideia com o identificador informado");
+            }
+
+            // Retornando o indicativo de sucesso
+            return new IdeiaDto(true, "Ideia alterado com sucesso", tIdeia);
+        }
+	    
 	    
 	    public IdeiaDto deletarIdeia(int pIdIdeia)
 	    {
@@ -128,7 +140,7 @@ public class IdeiaController {
 	            return new IdeiaDto(false, "Não existe ideia com o identificador informado");
 	        }
 
-	        // Removendo a consulta
+	        // Removendo a ideia
 	        if (!tDaoIdeia.delete(pIdIdeia))
 	        {
 	            return new IdeiaDto(false, "Erro no processo de remoção");

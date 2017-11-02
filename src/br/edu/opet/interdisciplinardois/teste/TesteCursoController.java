@@ -2,6 +2,7 @@ package br.edu.opet.interdisciplinardois.teste;
 
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.util.List;
 
 import br.edu.opet.interdisciplinardois.controller.CursoController;
 import br.edu.opet.interdisciplinardois.dao.AlunoDao;
@@ -203,6 +204,25 @@ public class TesteCursoController {
 		} else {
 			System.out.println("ERRO.... : " + tDto.getMensagem());
 		}
+		
+		 // Recuperando os cursos por nome
+        System.out.println();
+        System.out.println("Recuperando os cursos por nome");
+        tDto = tController.pesquisarCursoPorNome(tCurso2a.getNome());
+        if (tDto.isOk())
+        {
+            System.out.println("OK...... : " + tDto.getMensagem());
+            List<Curso> tLista = tDto.getLista();
+            for (Curso tCurso : tLista)
+            {
+                System.out.println("         : " + tCurso);
+            }
+        }
+        else
+        {
+            System.out.println("ERRO.... : " + tDto.getMensagem());
+        }
+
 
 		// Removendo o Curso
 		System.out.println();

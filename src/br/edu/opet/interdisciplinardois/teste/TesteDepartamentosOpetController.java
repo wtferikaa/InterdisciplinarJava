@@ -2,7 +2,7 @@ package br.edu.opet.interdisciplinardois.teste;
 
 import java.text.ParseException;
 import java.time.LocalDate;
-
+import java.util.List;
 
 import br.edu.opet.interdisciplinardois.controller.DepartamentosOpetController;
 import br.edu.opet.interdisciplinardois.dao.AlunoDao;
@@ -206,8 +206,27 @@ public class TesteDepartamentosOpetController {
 		} else {
 			System.out.println("ERRO.... : " + tDto.getMensagem());
 		}
+		
+		 // Recuperando os departamentos por Nome
+        System.out.println();
+        System.out.println("Recuperando os departamentos por nome");
+        tDto = tController.pesquisarDepartamentoPorNome(tDepartamentosOpet2a.getNome());
+        if (tDto.isOk())
+        {
+            System.out.println("OK...... : " + tDto.getMensagem());
+            List<DepartamentosOpet> tLista = tDto.getLista();
+            for (DepartamentosOpet tDepartamentosOpet : tLista)
+            {
+                System.out.println("         : " + tDepartamentosOpet);
+            }
+        }
+        else
+        {
+            System.out.println("ERRO.... : " + tDto.getMensagem());
+        }
 
-		// Removendo o paciente
+
+		// Removendo o departamento
 		System.out.println();
 		System.out.println("Removendo um departamento via controller");
 		tDto = tController.removeDepartamentosOpet(tDepartamentosOpetB.getId());
