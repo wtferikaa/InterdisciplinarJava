@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+    <h:head>
+        <link rel="StyleSheet" type="text/css" href="../../css/projeto.css" media="screen" />
+    </h:head>
+    <body> 
+        <h2>Pesquisa de Departamentos</h2>
+        <h:form id="inclusaoDepartamento">
+            Nome : 
+            <h:inputText id="nome" value="#{DepartamentosOpetVB.nome}" size="50" label="Nome" />
+            &nbsp;
+            <h:commandButton value="Pesquisar" action="#{DepartamentosOpetVB.pesquisar}"
+                                   ajax="false"/>
+            <br/><br/>
+            <h:dataTable value="#{DepartamentosOpetVB.listaDepartamentosOpet}" 
+                         var="departamento"
+                         cellpadding="5"
+                         styleClass="tabela"
+                         headerClass="cabecalho"
+                         rowClasses="linha-impar,linha-par"
+                         width="100%">
+                <h:column>
+                    <f:facet name="header">Id.</f:facet>
+                    <h:commandLink action="#{DepartamentosOpetVB.consultar}" value="#{departamento.id}">
+				        <f:setPropertyActionListener target="#{DepartamentosOpetVB.id}" value="#{departamento.id}" />
+				        <f:setPropertyActionListener target="#{DepartamentosOpetVB.tela}" value="consultar" />
+                    </h:commandLink>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">E-mail</f:facet>
+                    <h:commandLink action="#{DepartamentosOpetVB.consultar}" value="#{departamento.email}">
+				        <f:setPropertyActionListener target="#{DepartamentosOpetVB.id}" value="#{departamento.id}" />
+				        <f:setPropertyActionListener target="#{DepartamentosOpetVB.tela}" value="consultar" />
+                    </h:commandLink>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Nome</f:facet>
+                    <h:commandLink action="#{DepartamentosOpetVB.consultar}" value="#{departamento.nome}">
+				        <f:setPropertyActionListener target="#{DepartamentosOpetVB.id}" value="#{departamento.id}" />
+				        <f:setPropertyActionListener target="#{DepartamentosOpetVB.tela}" value="consultar" />
+                    </h:commandLink>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Alterar</f:facet>
+                    <h:commandButton value="Alterar" action="#{DepartamentosOpetVB.consultar}"
+                                     ajax="false">
+				        <f:setPropertyActionListener target="#{DepartamentosOpetVB.id}" value="#{departamento.id}" />
+				        <f:setPropertyActionListener target="#{DepartamentosOpetVB.tela}" value="alterar" />
+			        </h:commandButton>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Excluir</f:facet>
+                    <h:commandButton value="Excluir" action="#{DepartamentosOpetVB.consultar}"
+                                     ajax="false">
+				        <f:setPropertyActionListener target="#{DepartamentosOpetVB.id}" value="#{departamento.id}" />
+				        <f:setPropertyActionListener target="#{DepartamentosOpetVB.tela}" value="excluir" />
+			        </h:commandButton>
+                </h:column>
+            </h:dataTable>        
+            <h:messages errorStyle="color:red;margin:8px;" infoStyle="color:blue;margin:8px;" layout="table"/>
+			<br/>
+            <h:commandButton value="Home" action="/index" immediate="true"/>
+        </h:form>
+    </body> 
+</html>

@@ -15,11 +15,9 @@ import br.edu.opet.interdisciplinardois.model.DepartamentosOpet;
 
 
 
-public class DepartamentosOpetJavaBean {
-	
 	@ViewScoped
-	@ManagedBean(name = "PacienteVB")
-	public class PacienteJavaBean
+	@ManagedBean(name = "DepartamentosOpetVB")
+	public class DepartamentosOpetJavaBean
 	{
 	    // Atributos - Valores dos componentes visuais
 	    private Integer        id;
@@ -302,4 +300,4 @@ public class DepartamentosOpetJavaBean {
 
 }
 	}
-}
+

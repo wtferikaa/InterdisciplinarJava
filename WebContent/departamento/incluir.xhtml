@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+	<h:head>
+	</h:head>
+	<body> 
+		<h2>Inclusão de Departamentos</h2><br/>
+		<h:form id="inclusaoDepartamentosOpet">
+			<h:panelGrid columns="2">
+				Identificador : 
+				<h:inputText id="id" value="#{DepartamentosOpetVB.id}" size="20" disabled="true" label="Identificador" />
+				E-mail : 
+				<h:inputText id="email" value="#{DepartamentosOpetVB.email}" size="50" label="Email" />
+				Senha : 
+				<h:inputSecret id="senha" redisplay="true" value="#{DepartamentosOpetVB.senha}" size="10" required="true" label="Senha" />
+				Nome : 
+				<h:inputText id="nome" value="#{DepartamentosOpetVB.nome}" size="50" required="true" label="Nome" />
+			</h:panelGrid>
+			<h:messages errorStyle="color:red;margin:8px;" infoStyle="color:blue;margin:8px;" layout="table"/>
+			<h:commandButton value="Cadastrar" action="#{DepartamentosOpetVB.cadastrar}"
+                                   ajax="false"/>
+			&nbsp;
+			<h:commandButton value="Limpar" action="#{DepartamentosOpetVB.limpar}" immediate="true">
+				<f:setPropertyActionListener target="#{DepartamentosOpetVB.tela}" value="incluir" />
+			</h:commandButton>
+			&nbsp;
+			<h:commandButton value="Home" action="/index" immediate="true"/>
+		</h:form>
+	</body> 
+</html>

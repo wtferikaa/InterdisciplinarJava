@@ -1,0 +1,24 @@
+.tabela{
+	border-collapse:collapse;
+}
+
+.cabecalho{
+	text-align:center;
+	background:none repeat scroll 0 0 #3300FF;
+	color : #FFFFFF;
+	border-bottom:1px solid #BBBBBB;
+	border-left:1px solid #BBBBBB;
+	padding:5px;
+}
+
+.linha-impar{
+	text-align:left;
+	background:none repeat scroll 0 0 #FFFFFFF;
+	border:1px solid #BBBBBB;
+}
+
+.linha-par{
+	text-align:left;
+	background:none repeat scroll 0 0 #99FFFF;
+	border:1px solid #BBBBBB;
+}
