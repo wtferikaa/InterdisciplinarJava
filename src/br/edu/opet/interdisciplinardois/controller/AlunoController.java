@@ -8,16 +8,25 @@ import java.util.List;
 
 import br.edu.opet.interdisciplinardois.dao.AlunoDao;
 import br.edu.opet.interdisciplinardois.dao.CursoDao;
+
 import br.edu.opet.interdisciplinardois.dao.IdeiaDao;
 import br.edu.opet.interdisciplinardois.dto.AlunoDto;
+
 import br.edu.opet.interdisciplinardois.model.Aluno;
 import br.edu.opet.interdisciplinardois.model.Curso;
+
 
 public class AlunoController {
 	
 
 	public AlunoDto criarAluno(Aluno pAluno)
     {
+		
+		// Verificar as informações
+        if (pAluno == null)
+        {
+            return new AlunoDto(false, "Tentativa de inclusão de aluno nulo");
+        }
       
         // Criando os objetos DAO
         CursoDao tDaoCurso = new CursoDao();
@@ -52,7 +61,7 @@ public class AlunoController {
             // Criando o objeto de persistência
             AlunoDao tDao = new AlunoDao();
 
-            // Recuperando o medico
+            // Recuperando o aluno
             Aluno tAluno = tDao.recovery(pId);
             if (tAluno == null)
             {
@@ -65,23 +74,33 @@ public class AlunoController {
         
         public AlunoDto atualizarAluno (Aluno pAluno)
         {
-            // Verificar as informações
+        	 // Verificar as informações
             if (pAluno == null)
             {
                 return new AlunoDto(false, "Tentativa de atualização de aluno nulo");
             }
 
             // Criando o objeto de persistência
-            AlunoDao tDao = new AlunoDao();
+           AlunoDao tDao = new AlunoDao();
 
-            // Verificando se existe um Aluno com o novo CPF
+            // Recuperando o aluno
             Aluno tAluno = tDao.recovery(pAluno.getId());
-            if (tAluno != null)
+            if (tAluno == null)
             {
-                return new AlunoDto(false, "Já existe aluno com o identificador informado");
+                return new AlunoDto(false, "Não existe aluno com o identificador informado");
             }
 
-            // Atualizando o Aluno
+            if (!pAluno.getNome().equals(tAluno.getNome()))
+            {
+                // Verificando se existe um paciente com o novo nome
+                tAluno = tDao.recoveryByNome(pAluno.getNome());
+                if (tAluno != null)
+                {
+                    return new AlunoDto(false, "Já existe aluno com o nome informado");
+                }
+            }
+
+            // Atualizando o aluno
             tAluno = tDao.update(pAluno);
             if (tAluno == null)
             {
@@ -89,7 +108,7 @@ public class AlunoController {
             }
 
             // Retornando o indicativo de sucesso
-            return new AlunoDto(true, "Aluno alterado com sucesso", tAluno);
+            return new AlunoDto(true, "aluno alterado com sucesso", tAluno);
         }
         
         public AlunoDto removeAluno(int pId)

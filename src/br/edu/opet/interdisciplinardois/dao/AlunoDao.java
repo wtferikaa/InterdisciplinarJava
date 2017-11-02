@@ -10,6 +10,7 @@ import java.util.List;
 
 import br.edu.opet.interdisciplinardois.jdbc.Conexao;
 import br.edu.opet.interdisciplinardois.model.Aluno;
+
 import br.edu.opet.interdisciplinardois.util.ExceptionUtil;
 
 public class AlunoDao {
@@ -19,6 +20,9 @@ public class AlunoDao {
 	private String comandoRecovery = "SELECT ID, EMAIL, SENHA, NOME, TELEFONE, TURNO, TURMA, ID_CURSO " 
 			                       + "FROM ALUNO "
 			                       + "WHERE ID = ?";
+	private String comandoRecoveryByNome = "SELECT ID, EMAIL, SENHA, NOME, TELEFONE, TURNO, TURMA, ID_CURSO  "
+            + "FROM ALUNO "
+            + "WHERE NOME = ?";
 	private String comandoUpdate = "UPDATE ALUNO "
 			                       + "SET EMAIL = ?, " 
 			                       + "SENHA = ?, " 
@@ -119,6 +123,41 @@ public class AlunoDao {
 			}
 		} catch (SQLException tExcept) {
 			ExceptionUtil.mostrarErro(tExcept, "Problemas na recuperação do Aluno");
+		}
+
+		// Retorna null indicando algum erro de processamento
+		return null;
+	}
+	
+	public Aluno recoveryByNome(String pNome) {
+		try {
+			// Obter a conexão
+			Connection tConexao = Conexao.getConexao();
+
+			// Criar o comando
+			PreparedStatement tComandoJdbc = tConexao.prepareStatement(comandoRecoveryByNome);
+
+			// Preencher o comando
+			int i = 1;
+			tComandoJdbc.setString(i++, pNome);
+
+			// Executar o comando
+			ResultSet tResultSet = tComandoJdbc.executeQuery();
+
+			// Processar o resultado
+			if (tResultSet.next()) {
+				// Criando o objeto
+				Aluno tAluno = recuperarAluno(tResultSet);
+
+				// Liberar os recursos
+				tResultSet.close();
+				tComandoJdbc.close();
+
+				// Retornando o objeto inserido
+				return tAluno;
+			}
+		} catch (SQLException tExcept) {
+			ExceptionUtil.mostrarErro(tExcept, "Problemas na recuperação do aluno por Nome");
 		}
 
 		// Retorna null indicando algum erro de processamento

@@ -21,14 +21,14 @@ public class DepartamentosOpetController {
         // Criando o objeto de persistência
         DepartamentosOpetDao tDao = new DepartamentosOpetDao();
 
-        // Verificando se o paciente já existe
+        // Verificando se o departamento já existe
         DepartamentosOpet tDepartamentosOpet = tDao.recoveryByNome(pDepartamentosOpet.getNome());
         if (tDepartamentosOpet != null)
         {
             return new DepartamentosOpetDto(false, "Já existe esse departamento com o nome informado");
         }
 
-        // Incluindo o paciente
+        // Incluindo o departamento
         tDepartamentosOpet = tDao.create(pDepartamentosOpet);
         if (tDepartamentosOpet == null)
         {
