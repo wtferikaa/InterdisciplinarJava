@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+    <h:head>
+        <link rel="StyleSheet" type="text/css" href="../../css/projeto.css" media="screen" />
+    </h:head>
+    <body> 
+        <h2>Pesquisa de Ideias</h2>
+        <h:form id="inclusaoIdeia">
+            Nome : 
+            <h:inputText id="nome" value="#{IdeiaVB.nome}" size="50" label="Nome" />
+            &nbsp;
+            <h:commandButton value="Pesquisar" action="#{IdeiaVB.pesquisar}"
+                                   ajax="false"/>
+            <br/><br/>
+            <h:dataTable value="#{IdeiaVB.listaIdeia}" 
+                         var="paciente"
+                         cellpadding="5"
+                         styleClass="tabela"
+                         headerClass="cabecalho"
+                         rowClasses="linha-impar,linha-par"
+                         width="100%">
+                <h:column>
+                    <f:facet name="header">Id.</f:facet>
+                    <h:commandLink action="#{IdeiaVB.consultar}" value="#{ideia.id}">
+				        <f:setPropertyActionListener target="#{IdeiaVB.id}" value="#{ideia.id}" />
+				        <f:setPropertyActionListener target="#{IdeiaVB.tela}" value="consultar" />
+                    </h:commandLink>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Nome</f:facet>
+                    <h:commandLink action="#{IdeiaVB.consultar}" value="#{ideia.nome}">
+				        <f:setPropertyActionListener target="#{IdeiaVB.id}" value="#{ideia.id}" />
+				        <f:setPropertyActionListener target="#{IdeiaVB.tela}" value="consultar" />
+                    </h:commandLink>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Descricao do Problema</f:facet>
+                    <h:commandLink action="#{IdeiaVB.consultar}" value="#{ideia.descricaoProblema}">
+				        <f:setPropertyActionListener target="#{IdeiaVB.id}" value="#{ideia.id}" />
+				        <f:setPropertyActionListener target="#{IdeiaVB.tela}" value="consultar" />
+                    </h:commandLink>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Recomendacao</f:facet>
+                    <h:commandLink action="#{IdeiaVB.consultar}" value="#{ideia.recomendacao}">
+				        <f:setPropertyActionListener target="#{IdeiaVB.id}" value="#{ideia.id}" />
+				        <f:setPropertyActionListener target="#{IdeiaVB.tela}" value="consultar" />
+                    </h:commandLink>
+                </h:column>
+               
+                
+                <h:column>
+                    <f:facet name="header">Data do Cadastro</f:facet>
+                    <h:commandLink action="#{IdeiaVB.consultar}" value="#{ideia.dataCadastro}">
+				        <f:setPropertyActionListener target="#{IdeiaVB.id}" value="#{ideia.id}" />
+				        <f:setPropertyActionListener target="#{IdeiaVB.tela}" value="consultar" />
+                    </h:commandLink>
+                </h:column>
+                <h:column>
+                <f:facet name="header">Data de Analise</f:facet>
+                    <h:commandLink action="#{IdeiaVB.consultar}" value="#{ideia.dataAnalise}">
+				        <f:setPropertyActionListener target="#{IdeiaVB.id}" value="#{ideia.id}" />
+				        <f:setPropertyActionListener target="#{IdeiaVB.tela}" value="consultar" />
+                    </h:commandLink>
+                </h:column>
+                
+                <h:column>
+                <f:facet name="header">Aprovado</f:facet>
+                    <h:commandLink action="#{IdeiaVB.consultar}" value="#{ideia.aprovado}">
+				        <f:setPropertyActionListener target="#{IdeiaVB.id}" value="#{ideia.id}" />
+				        <f:setPropertyActionListener target="#{IdeiaVB.tela}" value="consultar" />
+                    </h:commandLink>
+                    </h:column>
+                
+                
+                <h:column>
+                <f:facet name="header">Reposta</f:facet>
+                    <h:commandLink action="#{IdeiaVB.consultar}" value="#{ideia.resposta}">
+				        <f:setPropertyActionListener target="#{IdeiaVB.id}" value="#{ideia.id}" />
+				        <f:setPropertyActionListener target="#{IdeiaVB.tela}" value="consultar" />
+                    </h:commandLink>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Alterar</f:facet>
+                    <h:commandButton value="Alterar" action="#{IdeiaVB.consultar}"
+                                     ajax="false">
+				        <f:setPropertyActionListener target="#{IdeiaVB.id}" value="#{ideia.id}" />
+				        <f:setPropertyActionListener target="#{IdeiaVB.tela}" value="alterar" />
+			        </h:commandButton>
+                </h:column>
+                
+                <h:column>
+                    <f:facet name="header">Excluir</f:facet>
+                    <h:commandButton value="Excluir" action="#{IdeiaVB.consultar}"
+                                     ajax="false">
+				        <f:setPropertyActionListener target="#{IdeiaVB.id}" value="#{ideia.id}" />
+				        <f:setPropertyActionListener target="#{IdeiaVB.tela}" value="excluir" />
+			        </h:commandButton>
+                </h:column>
+            </h:dataTable>        
+            <h:messages errorStyle="color:red;margin:8px;" infoStyle="color:blue;margin:8px;" layout="table"/>
+			<br/>
+            <h:commandButton value="Home" action="/index" immediate="true"/>
+        </h:form>
+    </body> 
+</html>

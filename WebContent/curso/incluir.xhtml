@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+	<h:head>
+	</h:head>
+	<body> 
+		<h2>Inclusão de Cursos</h2><br/>
+		<h:form id="inclusaoCurso">
+			<h:panelGrid columns="2">
+				Identificador : 
+				<h:inputText id="id" value="#{CursoVB.id}" size="20" disabled="true" label="Identificador" />
+				E-mail : 
+				<h:inputText id="email" value="#{CursoVB.email}" size="50" label="Email" />
+				Senha : 
+				<h:inputSecret id="senha" redisplay="true" value="#{CursoVB.senha}" size="10" required="true" label="Senha" />
+				Nome : 
+				<h:inputText id="nome" value="#{CursoVB.nome}" size="50" required="true" label="Nome" />
+				Nome do Coordenador : 
+				<h:inputText id="nomeCoordenador" value="#{CursoVB.nomeCoordenador}" size="11" required="true" label="Nome Coordenador" />
+			</h:panelGrid>
+			<h:messages errorStyle="color:red;margin:8px;" infoStyle="color:blue;margin:8px;" layout="table"/>
+			<h:commandButton value="Cadastrar" action="#{CursoVB.cadastrar}"
+                                   ajax="false"/>
+			&nbsp;
+			<h:commandButton value="Limpar" action="#{CursoVB.limpar}" immediate="true">
+				<f:setPropertyActionListener target="#{CursoVB.tela}" value="incluir" />
+			</h:commandButton>
+			&nbsp;
+			<h:commandButton value="Home" action="/index" immediate="true"/>
+		</h:form>
+	</body> 
+</html>

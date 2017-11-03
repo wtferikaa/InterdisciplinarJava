@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+    <h:head>
+        <link rel="StyleSheet" type="text/css" href="../../css/projeto.css" media="screen" />
+    </h:head>
+    <body> 
+        <h2>Pesquisa de Cursos</h2>
+        <h:form id="inclusaoCursos">
+            Nome : 
+            <h:inputText id="nome" value="#{CursoVB.nome}" size="50" label="Nome" />
+            &nbsp;
+            <h:commandButton value="Pesquisar" action="#{CursoVB.pesquisar}"
+                                   ajax="false"/>
+            <br/><br/>
+            <h:dataTable value="#{CursoVB.listaCurso}" 
+                         var="curso"
+                         cellpadding="5"
+                         styleClass="tabela"
+                         headerClass="cabecalho"
+                         rowClasses="linha-impar,linha-par"
+                         width="100%">
+                <h:column>
+                    <f:facet name="header">Id.</f:facet>
+                    <h:commandLink action="#{CursoVB.consultar}" value="#{curso.id}">
+				        <f:setPropertyActionListener target="#{CursoVB.id}" value="#{curso.id}" />
+				        <f:setPropertyActionListener target="#{CursoVB.tela}" value="consultar" />
+                    </h:commandLink>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">E-mail</f:facet>
+                    <h:commandLink action="#{CursoVB.consultar}" value="#{curso.email}">
+				        <f:setPropertyActionListener target="#{CursoVB.id}" value="#{curso.id}" />
+				        <f:setPropertyActionListener target="#{CursoVB.tela}" value="consultar" />
+                    </h:commandLink>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Nome</f:facet>
+                    <h:commandLink action="#{CursoVB.consultar}" value="#{curso.nome}">
+				        <f:setPropertyActionListener target="#{CursoVB.id}" value="#{curso.id}" />
+				        <f:setPropertyActionListener target="#{CursoVB.tela}" value="consultar" />
+                    </h:commandLink>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Nome Coordenador</f:facet>
+                    <h:commandLink action="#{CursoVB.consultar}" value="#{curso.nomeCoordenador}">
+				        <f:setPropertyActionListener target="#{CursoVB.id}" value="#{curso.id}" />
+				        <f:setPropertyActionListener target="#{CursoVB.tela}" value="consultar" />
+                    </h:commandLink>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Alterar</f:facet>
+                    <h:commandButton value="Alterar" action="#{CursoVB.consultar}"
+                                     ajax="false">
+				        <f:setPropertyActionListener target="#{CursoVB.id}" value="#{curso.id}" />
+				        <f:setPropertyActionListener target="#{CursoVB.tela}" value="alterar" />
+			        </h:commandButton>
+                </h:column>
+                <h:column>
+                    <f:facet name="header">Excluir</f:facet>
+                    <h:commandButton value="Excluir" action="#{CursoVB.consultar}"
+                                     ajax="false">
+				        <f:setPropertyActionListener target="#{CursoVB.id}" value="#{curso.id}" />
+				        <f:setPropertyActionListener target="#{CursoVB.tela}" value="excluir" />
+			        </h:commandButton>
+                </h:column>
+            </h:dataTable>        
+            <h:messages errorStyle="color:red;margin:8px;" infoStyle="color:blue;margin:8px;" layout="table"/>
+			<br/>
+            <h:commandButton value="Home" action="/index" immediate="true"/>
+        </h:form>
+    </body> 
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+	<h:head>
+	</h:head>
+	<body> 
+		<h2>Alteração de Alunos</h2>
+		<h:form id="inclusaoAluno">
+			<h:panelGrid columns="2">
+				<h:outputText value="Identificador : "/> 
+				<h:panelGroup>
+					<h:inputText id="id"  required="true" disabled="#{AlunoVB.edicao}" value="#{AlunoVB.id}" size="20" label="Identificador" />
+	    			&nbsp;
+				    <h:commandButton disabled="#{AlunoVB.edicao}" value="Pesquisar" action="#{AlunoVB.consultar}"/>
+				</h:panelGroup>
+				<h:outputText value="E-mail :" disabled="#{!AlunoVB.edicao}"/> 
+				<h:inputText id="email" disabled="#{!AlunoVB.edicao}" value="#{AlunoVB.email}" size="50" label="Email" />
+				<h:outputText value="Senha : " disabled="#{!AlunoVB.edicao}"/> 
+				<h:inputSecret disabled="#{!PacienteVB.edicao}"  id="senha" redisplay="true" value="#{AlunoVB.senha}" size="10" required="true" label="Senha" />
+				<h:outputText value="Nome :" disabled="#{!AlunoVB.edicao}"/> 
+				<h:inputText id="nome" disabled="#{!AlunoVB.edicao}" value="#{AlunoVB.nome}" size="50" required="true" label="Nome" />
+				<h:outputText value="Telefone :" disabled="#{!AlunoVB.edicao}"/> 
+				<h:inputText id="telefone" disabled="#{!AlunoVB.edicao}" value="#{AlunoVB.telefone}" size="15" required="true" label="Telefone" />
+				<h:outputText value="Turno :" disabled="#{!Aluno.edicao}" /> 
+				<h:inputText id="turno" disabled="#{!AlunoVB.edicao}" value="#{AlunoVB.turno}" size="11" required="true" label="Turno" />
+				<h:outputText value="Turma :" disabled="#{!Aluno.edicao}" /> 
+				<h:inputText id="turma" disabled="#{!AlunoVB.edicao}" value="#{AlunoVB.turma}" size="11" required="true" label="Turma" />
+			</h:panelGrid>
+			<h:messages errorStyle="color:red;margin:8px;" infoStyle="color:blue;margin:8px;" layout="table"/>
+			<h:commandButton value="Alterar" disabled="#{!AlunoVB.edicao}" action="#{AlunoVB.alterar}" ajax="false">
+				<f:setPropertyActionListener target="#{AlunoVB.tela}" value="alterar" />
+			</h:commandButton>
+			&nbsp;
+			<h:commandButton value="Limpar" action="#{AlunoVB.limpar}" immediate="true">
+				<f:setPropertyActionListener target="#{AlunoVB.tela}" value="alterar" />
+			</h:commandButton>
+			&nbsp;
+			<h:commandButton value="Home" action="/index" immediate="true"/>
+		</h:form>
+	</body> 
+</html>

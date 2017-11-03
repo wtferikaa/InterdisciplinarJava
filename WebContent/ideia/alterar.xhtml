@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+	<h:head>
+	</h:head>
+	<body> 
+		<h2>Alteração de Ideias</h2>
+		<h:form id="inclusaoIdeia">
+			<h:panelGrid columns="2">
+				<h:outputText value="Identificador : "/> 
+				<h:panelGroup>
+					<h:inputText id="id"  required="true" disabled="#{IdeiaVB.edicao}" value="#{IdeiaVB.id}" size="20" label="Identificador" />
+	    			&nbsp;
+				    <h:commandButton disabled="#{IdeiaVB.edicao}" value="Pesquisar" action="#{IdeiaVB.consultar}"/>
+				</h:panelGroup>
+				<h:outputText value="Nome da Ideia :" disabled="#{!IdeiaVB.edicao}"/> 
+				<h:inputText id="nome" disabled="#{!IdeiaVB.edicao}" value="#{IdeiaVB.nome}" size="50" label="Nome" />
+				
+				<h:outputText value="Descrição do Problema : " disabled="#{!IdeiaVB.edicao}"/> 
+				<h:inputSecret disabled="#{!IdeiaVB.edicao}"  id="descricaoProblema" redisplay="true" value="#{IdeiaVB.descricaoProblema}" size="10" required="true" label="Descrição do Problema" />
+				
+				<h:outputText value="Recomendação :" disabled="#{!IdeiaVB.edicao}"/> 
+				<h:inputText id="recomendacao" disabled="#{!IdeiaVB.edicao}" value="#{IdeiaVB.nome}" size="50" required="true" label="Recomendação" />
+				
+				<h:outputText value="Data de Cadastro :" disabled="#{!IdeiaVB.edicao}"/> 
+				<h:inputText id="dataCadastro" disabled="#{!IdeiaVB.edicao}" value="#{IdeiaVB.dataCadastro}" size="10" required="true" label="Data de Cadastro" >
+					<f:convertDateTime pattern="d/M/yyyy" />
+				</h:inputText>
+				
+				<h:outputText value="Data de Análise :" disabled="#{!IdeiaVB.edicao}"/> 
+				<h:inputText id="dataAnalise" disabled="#{!IdeiaVB.edicao}" value="#{IdeiaVB.dataAnalise}" size="10" required="true" label="Data de Analise" >
+					<f:convertDateTime pattern="d/M/yyyy" />
+				</h:inputText>
+				
+				<h:outputText value="Aprovado :" disabled="#{!IdeiaVB.edicao}"/> 
+				<h:inputText id="aprovado" disabled="#{!IdeiaVB.edicao}" value="#{IdeiaVB.aprovado}" size="15" required="true" label="Aprovado" />
+				
+				<h:outputText value="Resposta :" disabled="#{!IdeiaVB.edicao}"/> 
+				<h:inputText id="resposta" disabled="#{!IdeiaVB.edicao}" value="#{IdeiaVB.resposta}" size="11" required="true" label="Reposta" />
+				
+			</h:panelGrid>
+			<h:messages errorStyle="color:red;margin:8px;" infoStyle="color:blue;margin:8px;" layout="table"/>
+			<h:commandButton value="Alterar" disabled="#{!IdeiaVB.edicao}" action="#{IdeiaVB.alterar}" ajax="false">
+				<f:setPropertyActionListener target="#{IdeiaVB.tela}" value="alterar" />
+			</h:commandButton>
+			&nbsp;
+			<h:commandButton value="Limpar" action="#{IdeiaVB.limpar}" immediate="true">
+				<f:setPropertyActionListener target="#{IdeiaVB.tela}" value="alterar" />
+			</h:commandButton>
+			&nbsp;
+			<h:commandButton value="Home" action="/index" immediate="true"/>
+		</h:form>
+	</body> 
+</html>
