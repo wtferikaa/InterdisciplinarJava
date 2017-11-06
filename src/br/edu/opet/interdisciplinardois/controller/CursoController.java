@@ -121,7 +121,7 @@ public class CursoController {
         // Criando o objeto de persistência
         CursoDao tDao = new CursoDao();
 
-        // Incluindo o paciente
+        // Incluindo o curso
         if (tDao.delete(pId))
         {
             // Retornando o indicativo de sucesso

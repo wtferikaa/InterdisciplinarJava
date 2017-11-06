@@ -41,28 +41,28 @@ public class IdeiaDao {
 				                     + "RESPOSTA = ?, "
 				                     + "ID_ALUNO = ?, "
 				                     + "ID_DEPARTAMENTOSOPET = ? "
-				                     + "WHERE ID = ?";
+				                     + "WHERE ID = ? ";
 		private String comandoDelete = "DELETE FROM IDEIA " 
 				                     + "WHERE ID = ?";
 		private String comandoSearch = "SELECT ID, NOME, DESCRICAODOPROBLEMA, RECOMENDACAO, DATACADASTRO, "
 				                     + "DATAANALISE, APROVADO, RESPOSTA, ID_ALUNO, ID_DEPARTAMENTOSOPET "
 				                     + "FROM IDEIA";
 	   private String comandoSearchByAluno   = "SELECT ID, NOME, DESCRICAODOPROBLEMA, RECOMENDACAO, DATACADASTRO, "
-	   		     + " DATAANALISE, APROVADO, RESPOSTA, ID_ALUNO, ID_DEPARTAMENTOSOPET "
+	   		     + "DATAANALISE, APROVADO, RESPOSTA, ID_ALUNO, ID_DEPARTAMENTOSOPET "
                  + "FROM IDEIA "
                  + "WHERE ID_ALUNO = ?";
          private String comandoCountByAluno   = "SELECT COUNT(ID_ALUNO) "
                  + "FROM IDEIA "
                  + "WHERE ID_ALUNO = ?";
          private String comandoSearchByDepartamento   = "SELECT ID, NOME, DESCRICAODOPROBLEMA, RECOMENDACAO, DATACADASTRO, "
-	   		     + " DATAANALISE, APROVADO, RESPOSTA, ID_ALUNO, ID_DEPARTAMENTOSOPET "
+	   		     + "DATAANALISE, APROVADO, RESPOSTA, ID_ALUNO, ID_DEPARTAMENTOSOPET "
                  + "FROM IDEIA "
                  + "WHERE ID_DEPARTAMENTOSOPET = ?";
          private String comandoCountByDepartamento   = "SELECT COUNT(ID_DEPARTAMENTOSOPET) "
                  + "FROM IDEIA "
                  + "WHERE ID_DEPARTAMENTOSOPET = ?";
          private String comandoSearchByNome = "SELECT ID, NOME, DESCRICAODOPROBLEMA, RECOMENDACAO, DATACADASTRO, "
-         		 + " DATAANALISE, APROVADO, RESPOSTA, ID_ALUNO, ID_DEPARTAMENTOSOPET "
+         		 + "DATAANALISE, APROVADO, RESPOSTA, ID_ALUNO, ID_DEPARTAMENTOSOPET "
                  + "FROM IDEIA "
                  + "WHERE UPPER(NOME) LIKE UPPER(?)";
 		

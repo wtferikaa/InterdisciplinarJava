@@ -171,7 +171,7 @@ public class TesteAlunoController {
 
 			// Atualizando o aluno
 			System.out.println();
-			System.out.println("Atualizando um departamento via controller");
+			System.out.println("Atualizando um aluno via controller");
 			tDto = tController.atualizarAluno(tAlunoB);
 			if (tDto.isOk()) {
 				System.out.println("OK...... : " + tDto.getMensagem());

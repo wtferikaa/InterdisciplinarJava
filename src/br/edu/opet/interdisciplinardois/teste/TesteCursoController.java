@@ -228,8 +228,7 @@ public class TesteCursoController {
 		System.out.println();
 		System.out.println("Removendo um Curso via controller");
 		tDto = tController.removeCurso(tCursoB.getId());
-		if (tDto.isOk())
-		{
+		if (tDto.isOk()){
 			System.out.println("OK...... : " + tDto.getMensagem());
 		} 
 		else 

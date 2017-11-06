@@ -38,10 +38,10 @@ public class AlunoDao {
 			                       + "FROM ALUNO";
 	private String comandoSearchByCurso = "SELECT ID, EMAIL, SENHA, NOME, TELEFONE, TURNO, TURMA, ID_CURSO "
 			                      + "FROM ALUNO " 
-			                      + "WHERE ID_CURSO = ? ";
-	 private String comandoCountByCurso   = "SELECT COUNT(ID) "
-             + "FROM CURSO "
-             + "WHERE ID= ?";
+			                      + "WHERE ID_CURSO = ?";
+	 private String comandoCountByCurso   = "SELECT COUNT(ID_CURSO) "
+             + "FROM ALUNO "
+             + "WHERE ID_CURSO = ?";
 	private String comandoSearchByNome = "SELECT ID, EMAIL, SENHA, NOME, TELEFONE, TURNO, TURMA, ID_CURSO "
             + "FROM ALUNO "
             + "WHERE UPPER(NOME) LIKE UPPER(?)";

@@ -169,35 +169,6 @@ public class TesteIdeiaController {
 						System.out.println("ERRO.... : " + tDto.getMensagem());
 					}
 					
-					// incluir ideia para aluno que nao existe
-			        System.out.println();
-			        System.out.println("incluindo uma ideia para um aluno que não existe");
-			        tIdeiaB.setIdAluno(0);
-			        tDto = tController.criarIdeia(tIdeiaB);
-			        if (!tDto.isOk())
-			        {
-			            System.out.println("OK...... : " + tDto.getMensagem());
-			        }
-			        else
-			        {
-			            System.out.println("ERRO.... : " + tDto.getMensagem());
-			        }
-			        
-			     // Incluir a ideia para um departamento que nao existe
-			        System.out.println();
-			        System.out.println("Incluindo a ideia para um departamento que nao existe");
-			        tIdeiaB.setIdDepartamentosOpet(0);
-			        tDto = tController.criarIdeia(tIdeiaB);
-			        if (!tDto.isOk())
-			        {
-			            System.out.println("OK...... : " + tDto.getMensagem());
-			        }
-			        else
-			        {
-			            System.out.println("ERRO.... : " + tDto.getMensagem());
-			        }
-			   	
-					
 					
 					// Recuperar a ideia
 					System.out.println();
@@ -237,6 +208,9 @@ public class TesteIdeiaController {
 					tIdeiaB.setDataAnalise(LocalDate.of(2017, 11, 2));
 					tIdeiaB.setAprovado(false);
 					tIdeiaB.setResposta("não gostei");
+					//tIdeiaB.setIdAluno(0);
+					//tIdeiaB.setIdDepartamentosOpet(0);
+					
 					
 					System.out.println();
 					System.out.println("Atualizando uma ideia com um nome que já existe");
@@ -248,7 +222,7 @@ public class TesteIdeiaController {
 					}
 
 					// Acertando o id para a atualização
-					tIdeiaB.setNome("Ideia com nome que já existe");
+					tIdeiaB.setNome("ideia boa");
 
 					// Atualizando a ideia
 					System.out.println();
