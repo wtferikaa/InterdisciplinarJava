@@ -144,7 +144,21 @@ public class CursoController {
         tLista = tDao.searchByNome(pNome);
 
         // Retornando o indicativo de sucesso
-        return new CursoDto(true, "Lista de cursos recuperada com sucesso", tLista);
+        return new CursoDto(true, "Lista de cursos por nome recuperada com sucesso", tLista);
     }
+    
+    public CursoDto pesquisarCurso() {
+		// Criando a lista de retorno
+		List<Curso> tLista = new ArrayList<>();
+
+		// Criando o objeto de persistência
+		CursoDao tDao = new CursoDao();
+
+		// Recuperando o Venda
+		tLista = tDao.search();
+
+		// Retornando o indicativo de sucesso
+		return new CursoDto(true, "Lista de cursos recuperada com sucesso", tLista);
+	}
 
 }

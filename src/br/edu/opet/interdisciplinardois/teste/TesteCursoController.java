@@ -23,7 +23,7 @@ public class TesteCursoController {
 		// Pré Teste
 		//
 		// Criar um curso
-		Curso tCursoA = new Curso(0, "jessica@gmail.com", "12345", "Direito", "Jessica");
+		Curso tCursoA = new Curso(0, "Direito", "Jessica");
 
 		// Criando o objeto de persistência
 		CursoDao tCursoDao = new CursoDao();
@@ -90,7 +90,7 @@ public class TesteCursoController {
 		CursoController tController = new CursoController();
 
 		// Criar um Curso
-		Curso tCursoB = new Curso(0, "emailnovo@gmail.com", "1234", "CursoLegal", "CoordenadorNovo");
+		Curso tCursoB = new Curso(0, "CursoLegal", "CoordenadorNovo");
 
 		// Criar o Curso
 		System.out.println();
@@ -144,8 +144,6 @@ public class TesteCursoController {
 		}
 
 		// Atualizar o Curso
-		tCursoB.setEmail("ronaldo@outlook.com");
-		tCursoB.setSenha("1234");
 		tCursoB.setNome(tCurso2a.getNome() + " DIREITO");
 		tCursoB.setNomeCoordenador("Ronaldo Rodrigues Robaldo");
 		
@@ -183,7 +181,7 @@ public class TesteCursoController {
 			System.out.println("ERRO.... : " + tDto.getMensagem());
 		}
 
-		Curso tCursoC = new Curso(0, "sememail@gmail.com", "semsenha", "sem nome", "sem coordenador");
+		Curso tCursoC = new Curso(0, "sem nome", "sem coordenador");
 
 		System.out.println();
 		System.out.println("Atualizando um Curso que não existe");

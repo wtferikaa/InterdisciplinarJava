@@ -46,8 +46,8 @@ class TesteIdeiaDao {
 			//Pré teste Curso
 			//
 			// Criar um Curso
-			Curso tCursoA = new Curso(0, "ronaldo@gmail.com", "123", "TDS", "Ronaldo");
-			Curso tCursoB = new Curso(0, "maria@gmail.com", "321", "Estética", "Maria");
+			Curso tCursoA = new Curso(0, "TDS", "Ronaldo");
+			Curso tCursoB = new Curso(0, "Estética", "Maria");
 
 			// Criando o objeto de persistência
 			CursoDao tCursoDao = new CursoDao();

@@ -15,25 +15,23 @@ import br.edu.opet.interdisciplinardois.util.ExceptionUtil;
 public class CursoDao {
 
 	private String comandoCreate = "INSERT INTO CURSO " 
-	                             + "(ID, EMAIL, SENHA, NOME, NOMECOORDENADOR)"
-			                     + "VALUES (CURSO_SEQ.NEXTVAL, ?, ?, ?, ?)";
-	private String comandoRecovery = "SELECT ID, EMAIL, SENHA, NOME, NOMECOORDENADOR "
+	                             + "(ID, NOME, NOMECOORDENADOR)"
+			                     + "VALUES (CURSO_SEQ.NEXTVAL, ?, ?)";
+	private String comandoRecovery = "SELECT ID, NOME, NOMECOORDENADOR "
 			                     + "FROM CURSO "
 			                     + "WHERE ID = ?";
-	private String comandoRecoveryByNome = "SELECT ID, EMAIL, SENHA, NOME, NOMECOORDENADOR " 
+	private String comandoRecoveryByNome = "SELECT ID, NOME, NOMECOORDENADOR " 
 			                     + "FROM CURSO "
 			                     + "WHERE NOME = ?";
 	private String comandoUpdate = "UPDATE CURSO " 
-			                     + "SET EMAIL = ?, " 
-			                     + "SENHA = ?, " 
 			                     + "NOME = ?, " 
 			                     + "NOMECOORDENADOR = ? "  
 			                     + "WHERE ID = ?";
 	private String comandoDelete = "DELETE FROM CURSO " 
 			                     + "WHERE ID = ?";
-	private String comandoSearch = "SELECT ID, EMAIL, SENHA, NOME, NOMECOORDENADOR " 
+	private String comandoSearch = "SELECT ID, NOME, NOMECOORDENADOR " 
 			                     + "FROM CURSO";
-	private String comandoSearchByNome = "SELECT ID, EMAIL, SENHA, NOME, NOMECOORDENADOR "
+	private String comandoSearchByNome = "SELECT ID, NOME, NOMECOORDENADOR "
             + "FROM CURSO "
             + "WHERE UPPER(NOME) LIKE UPPER(?)";
 
@@ -48,8 +46,6 @@ public class CursoDao {
 			
 			// Preencher o comando
 			int i = 1;
-			tComandoJdbc.setString(i++, pCurso.getEmail());
-            tComandoJdbc.setString(i++, pCurso.getSenha());
 			tComandoJdbc.setString(i++, pCurso.getNome());
 			tComandoJdbc.setString(i++, pCurso.getNomeCoordenador());
 
@@ -164,8 +160,7 @@ public class CursoDao {
 
 			// Preencher o comando
 			int i = 1;
-			tComandoJdbc.setString(i++, pCurso.getEmail());
-            tComandoJdbc.setString(i++, pCurso.getSenha());
+			
 			tComandoJdbc.setString(i++, pCurso.getNome());
 			tComandoJdbc.setString(i++, pCurso.getNomeCoordenador());
 			tComandoJdbc.setInt(i++, pCurso.getId());
@@ -308,8 +303,6 @@ public class CursoDao {
 
 		// Recuperando os dados do resultSet
 		tCurso.setId(tResultSet.getInt("ID"));
-		tCurso.setEmail(tResultSet.getString("EMAIL"));
-		tCurso.setSenha(tResultSet.getString("SENHA"));
 		tCurso.setNome(tResultSet.getString("NOME"));
 		tCurso.setNomeCoordenador(tResultSet.getString("NOMECOORDENADOR"));
 		return tCurso;

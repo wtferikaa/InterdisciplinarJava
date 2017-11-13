@@ -23,7 +23,7 @@ public class TesteDepartamentosOpetController {
 		// Pré Teste
 		//
 		// Criar um curso
-		Curso tCursoA = new Curso(0, "Lucas@gmail.com", "senhalucas", "Analise e Desenvolvimento de Sistemas",
+		Curso tCursoA = new Curso(0, "Analise e Desenvolvimento de Sistemas",
 				"Coordenador Lucas");
 
 		// Criando o objeto de persistência

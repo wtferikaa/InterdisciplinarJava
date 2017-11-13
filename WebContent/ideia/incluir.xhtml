@@ -22,14 +22,6 @@
 				<h:inputText id="dataCadastro" value="#{IdeiaVB.dataCadastro}" size="10" required="true" label="Data de Cadastro" >
 					<f:convertDateTime pattern="d/M/yyyy" />
 				</h:inputText>
-				Data de Analise : 
-				<h:inputText id="dataAnalise" value="#{IdeiaVB.dataAnalise}" size="10" required="false" label="Data de Analise" >
-					<f:convertDateTime pattern="d/M/yyyy" />
-				</h:inputText>
-				Aprovado : 
-				<h:inputText id="aprovado" value="#{IdeiaVB.aprovado}" size="15" required="false" label="Aprovado" />
-				Resposta : 
-				<h:inputText id="resposta" value="#{IdeiaVB.resposta}" size="11" required="false" label="Resposta" />
 			</h:panelGrid>
 			<h:messages errorStyle="color:red;margin:8px;" infoStyle="color:blue;margin:8px;" layout="table"/>
 			<h:commandButton value="Cadastrar" action="#{IdeiaVB.cadastrar}"

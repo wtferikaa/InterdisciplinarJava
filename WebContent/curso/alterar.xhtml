@@ -16,10 +16,6 @@
 	    			&nbsp;
 				    <h:commandButton disabled="#{CursoVB.edicao}" value="Pesquisar" action="#{CursoVB.consultar}"/>
 				</h:panelGroup>
-				<h:outputText value="E-mail :" disabled="#{!CursoVB.edicao}"/> 
-				<h:inputText id="email" disabled="#{!CursoVB.edicao}" value="#{CursoVB.email}" size="50" label="Email" />
-				<h:outputText value="Senha : " disabled="#{!CursoVB.edicao}"/> 
-				<h:inputSecret disabled="#{!CursoVB.edicao}"  id="senha" redisplay="true" value="#{CursoVB.senha}" size="10" required="true" label="Senha" />
 				<h:outputText value="Nome :" disabled="#{!CursoVB.edicao}"/> 
 				<h:inputText id="nome" disabled="#{!CursoVB.edicao}" value="#{CursoVB.nome}" size="50" required="true" label="Nome" />
 				<h:outputText value="Nome do Coordenador:" disabled="#{!CursoVB.edicao}"/> 

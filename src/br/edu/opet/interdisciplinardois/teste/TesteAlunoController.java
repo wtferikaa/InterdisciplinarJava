@@ -25,7 +25,7 @@ public class TesteAlunoController {
 	// Pré Teste
 	//
 	// Criar um curso
-	Curso tCursoA = new Curso(0, "Feriado@gmail.com", "feriado", "Curso do feriado",
+	Curso tCursoA = new Curso(0, "Curso do feriado",
 			"coordenador feriadão");
 
 	// Criando o objeto de persistência

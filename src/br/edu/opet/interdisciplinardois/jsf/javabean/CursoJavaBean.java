@@ -20,8 +20,6 @@ public class CursoJavaBean {
 	
 	 // Atributos - Valores dos componentes visuais
     private Integer        id;
-    private String         email;
-    private String         senha;
     private String         nome;
     private String         nomeCoordenador;
     private boolean        edicao;
@@ -36,8 +34,6 @@ public class CursoJavaBean {
         if (tCurso != null)
         {
             id = tCurso.getId();
-            email = tCurso.getEmail();
-            senha = tCurso.getSenha();
             nome = tCurso.getNome();
             nomeCoordenador = tCurso.getNomeCoordenador();
             edicao = true;
@@ -54,25 +50,6 @@ public class CursoJavaBean {
         id = pId;
     }
 
-    public String getEmail()
-    {
-        return email;
-    }
-
-    public void setEmail(String pEmail)
-    {
-        email = pEmail;
-    }
-
-    public String getSenha()
-    {
-        return senha;
-    }
-
-    public void setSenha(String pSenha)
-    {
-        senha = pSenha;
-    }
 
     public String getNome()
     {
@@ -129,8 +106,6 @@ public class CursoJavaBean {
     public String limpar()
     {
         id = null;
-        email = null;
-        senha = null;
         nome = null;
         nomeCoordenador = null;
         edicao = false;
@@ -143,8 +118,6 @@ public class CursoJavaBean {
         System.out.println("CursoVB - Cadastrar : " + this);
 
         Curso tCurso = new Curso();
-        tCurso.setEmail(email);
-        tCurso.setSenha(senha);
         tCurso.setNome(nome);
         tCurso.setNomeCoordenador(nomeCoordenador);
         
@@ -177,8 +150,6 @@ public class CursoJavaBean {
         System.out.println("CursoVB - Alterar : " + this);
         Curso tCurso = new Curso();
         tCurso.setId(id);
-        tCurso.setEmail(email);
-        tCurso.setSenha(senha);
         tCurso.setNome(nome);
         tCurso.setNomeCoordenador(nomeCoordenador);
 
@@ -217,8 +188,6 @@ public class CursoJavaBean {
             // Ok, recuperado
         	Curso tCurso = tDto.getCurso();
             id = tCurso.getId();
-            email = tCurso.getEmail();
-            senha = tCurso.getSenha();
             nome = tCurso.getNome();
             nomeCoordenador = tCurso.getNomeCoordenador();
 
@@ -303,10 +272,6 @@ public class CursoJavaBean {
         StringBuilder tBuilder = new StringBuilder();
         tBuilder.append(" [");
         tBuilder.append(id);
-        tBuilder.append(", ");
-        tBuilder.append(email);
-        tBuilder.append(", ");
-        tBuilder.append(senha);
         tBuilder.append(", ");
         tBuilder.append(nome);
         tBuilder.append(", ");

@@ -11,8 +11,8 @@ class TesteCursoDao {
 
 	public static void main(String[] pArgs) {
 		// Criar um Curso
-		Curso tCursoA = new Curso(0, "ronaldo@gmail.com", "123", "TDS", "Ronaldo");
-		Curso tCursoB = new Curso(0, "maria@gmail.com", "321", "Estética", "Maria");
+		Curso tCursoA = new Curso(0,  "TDS", "Ronaldo");
+		Curso tCursoB = new Curso(0,  "Estética", "Maria");
 
 		// Criando o objeto de persistência
 		CursoDao tDao = new CursoDao();
@@ -48,8 +48,6 @@ class TesteCursoDao {
 		// Atualizando o Curso primeiro Curso
 		System.out.println();
 		System.out.println("Atualizando");
-		tCurso2a.setEmail("ronaldo@outlook.com");
-		tCurso2a.setSenha("1234");
 		tCurso2a.setNome("TDSAM");
 		tCurso2a.setNomeCoordenador("Ronaldo Rodrigues Robaldo");
 		Curso tCurso4a = tDao.update(tCurso2a);
@@ -59,8 +57,6 @@ class TesteCursoDao {
 			System.out.println("ERRO.... : " + tCurso4a);
 		
 		//Atualizando o Segundo Curso
-        tCurso2b.setEmail("maria@outlook.com");
-        tCurso2b.setSenha("4321");
 		tCurso2b.setNome("Estética Opet");
 		tCurso2b.setNomeCoordenador("Maria Irineia");
 		Curso tCurso4b = tDao.update(tCurso2b);
