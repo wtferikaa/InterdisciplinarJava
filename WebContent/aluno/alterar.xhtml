@@ -24,16 +24,34 @@
 				<h:inputText id="nome" disabled="#{!AlunoVB.edicao}" value="#{AlunoVB.nome}" size="50" required="true" label="Nome" />
 				<h:outputText value="Telefone :" disabled="#{!AlunoVB.edicao}"/> 
 				<h:inputText id="telefone" disabled="#{!AlunoVB.edicao}" value="#{AlunoVB.telefone}" size="15" required="true" label="Telefone" />
-				<h:outputText value="Turno :" disabled="#{!Aluno.edicao}" /> 
-				<h:inputText id="turno" disabled="#{!AlunoVB.edicao}" value="#{AlunoVB.turno}" size="11" required="true" label="Turno" />
+				Turno:
+				<h:selectOneMenu value="#{AlunoVB.turno}" required="true" label="Turno" disabled="#{!AlunoVB.edicao}">
+				<f:selectItem itemValue="#{null}" itemLabel="---Selecione----" noSelectionOption="true" />
+				<f:selectItem itemValue="Manhã" itemLabel="Manhã" />
+				<f:selectItem itemValue="Tarde" itemLabel="Tarde" />
+				<f:selectItem itemValue="Noite" itemLabel="Noite" />
+				</h:selectOneMenu>
+	    		
 				<h:outputText value="Turma :" disabled="#{!Aluno.edicao}" /> 
 				<h:inputText id="turma" disabled="#{!AlunoVB.edicao}" value="#{AlunoVB.turma}" size="11" required="true" label="Turma" />
 				
-				<h:outputText value="Curso :" disabled="#{Aluno.idCurso}" /> 
-				<h:inputText id="nomeCurso" disabled="#{!AlunoVB.edicao}" value="#{AlunoVB.nomeCurso}" size="11" required="true" label="nomeCurso" />
+				Curso : 
+				<h:panelGroup>
+					<h:selectOneMenu   onchange="submit()" valueChangeListener = "#{AlunoVB.consultarCurso}"
+					                   value="#{AlunoVB.idCurso}" required="true" label="nomeCurso" disabled="#{!AlunoVB.edicao}">
+						<f:selectItem itemValue="#{null}" itemLabel="---Selecione----" noSelectionOption="true" />
+						
+					   	<f:selectItems itemValue="#{Curso.id}" itemLabel="#{Curso.nome}" value="#{AlunoVB.listaCurso}" var="Curso"  />
+
+					</h:selectOneMenu>
+	    			&nbsp;
+				    
+				</h:panelGroup>
 				
-				<h:outputText value="NomeCoordenador :" disabled="#{Aluno.idCurso}" /> 
-				<h:inputText id="nomeCurso" disabled="#{!AlunoVB.edicao}" value="#{AlunoVB.nomeCoordenador}" size="11" required="true" label="nomeCoordenador" />
+				Coordenador: 
+				<h:inputText id="nomeCoordenador" value="#{AlunoVB.nomeCoordenador}" size="50" required="false" label="nomeCoordenador" disabled = "true" />
+				
+			
 			</h:panelGrid>
 			<h:messages errorStyle="color:red;margin:8px;" infoStyle="color:blue;margin:8px;" layout="table"/>
 			<h:commandButton value="Alterar" disabled="#{!AlunoVB.edicao}" action="#{AlunoVB.alterar}" ajax="false">

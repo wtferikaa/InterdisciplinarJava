@@ -1,6 +1,8 @@
 package br.edu.opet.interdisciplinardois.jsf.javabean;
 
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -8,7 +10,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
-
 
 import br.edu.opet.interdisciplinardois.controller.AlunoController;
 import br.edu.opet.interdisciplinardois.controller.CursoController;
@@ -37,6 +38,7 @@ public class AlunoJavaBean {
 	private String tela;
 	private List<Aluno> listaAluno;
 	private List<Curso> listaCurso;
+	private Map< Integer, Curso> mapaCurso;
 	
 	
 
@@ -190,6 +192,16 @@ public class AlunoJavaBean {
 	}
 
 
+	public Map<Integer, Curso> getMapaCurso() {
+		return mapaCurso;
+	}
+
+
+	public void setMapaCurso(Map<Integer, Curso> mapaCurso) {
+		this.mapaCurso = mapaCurso;
+	}
+
+
 	@PostConstruct
 	public void init() {
 		Aluno tAluno = (Aluno) FacesContext.getCurrentInstance().getExternalContext().getRequestMap().get("ALUNO");
@@ -225,7 +237,13 @@ public class AlunoJavaBean {
         if (tDto.isOk())
         {
             // Ok, recuperado
-            listaCurso = tDto.getLista();
+            listaCurso = tDto.getLista(); 
+            mapaCurso = new Hashtable<>();
+            for (Curso tCurso : listaCurso) {
+            	mapaCurso.put(tCurso.getId(), tCurso);
+				
+			}
+            
         }
         else
         {
@@ -351,18 +369,12 @@ public class AlunoJavaBean {
 			turma = tAluno.getTurma();
 			idCurso = tAluno.getIdCurso();
 			
-			CursoController tCursoController = new CursoController();
-
-	        CursoDto tCursoDto = tCursoController.recuperarCurso(idCurso);
-	        //getCurso().getNomeCoordenador();
-	        
-	        if (tCursoDto.isOk())
-	        {
+			
 	            // Ok, recuperado
-	            nomeCoordenador = tCursoDto.getCurso().getNomeCoordenador();
-	            nomeCurso = tCursoDto.getCurso().getNome();
+	            nomeCoordenador = mapaCurso.get(idCurso).getNomeCoordenador();
+	            nomeCurso = mapaCurso.get(idCurso).getNome();
 	           
-	        }
+	        
 			
 
 			// indicando que a pesquisa deu certo
@@ -390,25 +402,12 @@ public class AlunoJavaBean {
 	        idCurso = Integer.parseInt(pEvento.getNewValue().toString());
 	        
 	        System.out.println("ID DO CURSO : " + idCurso);
-	        CursoController tController = new CursoController();
-
-	        CursoDto tDto = tController.recuperarCurso(idCurso);
-	        //getCurso().getNomeCoordenador();
 	        
-	        if (tDto.isOk())
-	        {
-	            // Ok, recuperado
-	            nomeCoordenador = tDto.getCurso().getNomeCoordenador();
-	            //nomeCurso = tDto.getCurso().getNome();
-	            //idCurso = tDto.getCurso().getId();
-	            //id = 0;
-	        }
-	        else
-	        {
-	            // Colocando a mensagem do sistema
-	            FacesContext.getCurrentInstance().addMessage(null,
-	                            new FacesMessage(FacesMessage.SEVERITY_ERROR, tDto.getMensagem(), tDto.getMensagem()));
-	        }
+	      // Ok, recuperado
+            nomeCoordenador = mapaCurso.get(idCurso).getNomeCoordenador();
+            nomeCurso = mapaCurso.get(idCurso).getNome();
+            
+	        
 	    }
 	 
 	 
@@ -451,11 +450,9 @@ public class AlunoJavaBean {
 		if (tDto.isOk()) {
 			// Ok, recuperado
 			listaAluno = tDto.getLista();
-		} else {
-			// Colocando a mensagem do sistema
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, tDto.getMensagem(), tDto.getMensagem()));
-		}
+		} 
+		
+		
 
 		return null;
 	}
