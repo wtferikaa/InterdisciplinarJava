@@ -28,6 +28,12 @@
 				<h:inputText id="turno" disabled="#{!AlunoVB.edicao}" value="#{AlunoVB.turno}" size="11" required="true" label="Turno" />
 				<h:outputText value="Turma :" disabled="#{!Aluno.edicao}" /> 
 				<h:inputText id="turma" disabled="#{!AlunoVB.edicao}" value="#{AlunoVB.turma}" size="11" required="true" label="Turma" />
+				
+				<h:outputText value="Curso :" disabled="#{Aluno.idCurso}" /> 
+				<h:inputText id="nomeCurso" disabled="#{!AlunoVB.edicao}" value="#{AlunoVB.nomeCurso}" size="11" required="true" label="nomeCurso" />
+				
+				<h:outputText value="NomeCoordenador :" disabled="#{Aluno.idCurso}" /> 
+				<h:inputText id="nomeCurso" disabled="#{!AlunoVB.edicao}" value="#{AlunoVB.nomeCoordenador}" size="11" required="true" label="nomeCoordenador" />
 			</h:panelGrid>
 			<h:messages errorStyle="color:red;margin:8px;" infoStyle="color:blue;margin:8px;" layout="table"/>
 			<h:commandButton value="Alterar" disabled="#{!AlunoVB.edicao}" action="#{AlunoVB.alterar}" ajax="false">

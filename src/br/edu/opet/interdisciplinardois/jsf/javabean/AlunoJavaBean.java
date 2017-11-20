@@ -7,6 +7,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
+
 
 import br.edu.opet.interdisciplinardois.controller.AlunoController;
 import br.edu.opet.interdisciplinardois.controller.CursoController;
@@ -211,8 +213,8 @@ public class AlunoJavaBean {
 			}
 
 			
-			//edicao = true;
-			//edicaoCurso = true;
+			 edicao = true;
+			 edicaoCurso = true;
 
 		}
 	
@@ -311,6 +313,7 @@ public class AlunoJavaBean {
 		tAluno.setIdCurso(idCurso);
 
 		AlunoController tController = new AlunoController();
+		
 
 		AlunoDto tDto = tController.atualizarAluno(tAluno);
 		if (tDto.isOk()) {
@@ -348,6 +351,19 @@ public class AlunoJavaBean {
 			turma = tAluno.getTurma();
 			idCurso = tAluno.getIdCurso();
 			
+			CursoController tCursoController = new CursoController();
+
+	        CursoDto tCursoDto = tCursoController.recuperarCurso(idCurso);
+	        //getCurso().getNomeCoordenador();
+	        
+	        if (tCursoDto.isOk())
+	        {
+	            // Ok, recuperado
+	            nomeCoordenador = tCursoDto.getCurso().getNomeCoordenador();
+	            nomeCurso = tCursoDto.getCurso().getNome();
+	           
+	        }
+			
 
 			// indicando que a pesquisa deu certo
 			edicao = true;
@@ -367,6 +383,35 @@ public class AlunoJavaBean {
 	}
 
 	
+	 public void consultarCurso(ValueChangeEvent pEvento)
+	    {
+	        System.out.println("AlunoVB - consultarCurso : " + this);
+	        
+	        idCurso = Integer.parseInt(pEvento.getNewValue().toString());
+	        
+	        System.out.println("ID DO CURSO : " + idCurso);
+	        CursoController tController = new CursoController();
+
+	        CursoDto tDto = tController.recuperarCurso(idCurso);
+	        //getCurso().getNomeCoordenador();
+	        
+	        if (tDto.isOk())
+	        {
+	            // Ok, recuperado
+	            nomeCoordenador = tDto.getCurso().getNomeCoordenador();
+	            //nomeCurso = tDto.getCurso().getNome();
+	            //idCurso = tDto.getCurso().getId();
+	            //id = 0;
+	        }
+	        else
+	        {
+	            // Colocando a mensagem do sistema
+	            FacesContext.getCurrentInstance().addMessage(null,
+	                            new FacesMessage(FacesMessage.SEVERITY_ERROR, tDto.getMensagem(), tDto.getMensagem()));
+	        }
+	    }
+	 
+	 
 
 	public String excluir() {
 		System.out.println("AlunoVB - Excluir : " + this);

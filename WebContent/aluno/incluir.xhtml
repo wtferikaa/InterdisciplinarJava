@@ -32,20 +32,19 @@
 	    			&nbsp;
                 Curso : 
 				<h:panelGroup>
-					<h:selectOneMenu value="#{AlunoVB.idCurso}" required="true" label="nomeCurso">
+					<h:selectOneMenu   onchange="submit()" valueChangeListener = "#{AlunoVB.consultarCurso}"
+					                   value="#{AlunoVB.idCurso}" required="true" label="nomeCurso">
 						<f:selectItem itemValue="#{null}" itemLabel="---Selecione----" noSelectionOption="true" />
-					   	<f:selectItems itemValue="{Curso.id}" itemLabel="#{Curso.nome}" value="#{AlunoVB.listaCurso}" var="Curso"  />
-					   
+						
+					   	<f:selectItems itemValue="#{Curso.id}" itemLabel="#{Curso.nome}" value="#{AlunoVB.listaCurso}" var="Curso"  />
+
 					</h:selectOneMenu>
 	    			&nbsp;
 				    
 				</h:panelGroup>
 				
 				Coordenador: 
-				<h:selectOneMenu value="#{AlunoVB.idCurso}" label="Curso" required="true"  >
-                 <f:selectItem itemValue="#{null}" itemLabel="---Selecione----" noSelectionOption="true" />
-		   			<f:selectItems itemValue="{Curso.id}" itemLabel="#{Curso.nomeCoordenador}" value="#{AlunoVB.listaCurso}" var="Curso"/>
-		   		</h:selectOneMenu>
+				<h:inputText id="nomeCoordenador" value="#{AlunoVB.nomeCoordenador}" size="10" required="false" label="nomeCoordenador" disabled = "true" />
 				
 			</h:panelGrid>
 			<h:messages errorStyle="color:red;margin:8px;" infoStyle="color:blue;margin:8px;" layout="table"/>
