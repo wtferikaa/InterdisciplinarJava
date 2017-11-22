@@ -16,6 +16,7 @@ import br.edu.opet.interdisciplinardois.model.Aluno;
 import br.edu.opet.interdisciplinardois.model.Curso;
 
 
+
 public class AlunoController {
 	
 
@@ -173,6 +174,20 @@ public class AlunoController {
             // Retornando o indicativo de sucesso
             return new AlunoDto(true, "Lista de alunos por nome recuperada com sucesso", tLista);
         }
+        
+        public AlunoDto pesquisarAluno() {
+			// Criando a lista de retorno
+			List<Aluno> tLista = new ArrayList<>();
+
+			// Criando o objeto de persistência
+			AlunoDao tDao = new AlunoDao();
+
+			// Recuperando o Venda
+			tLista = tDao.search();
+
+			// Retornando o indicativo de sucesso
+			return new AlunoDto(true, "Lista de ideias recuperada com sucesso", tLista);
+		}
 
         
         

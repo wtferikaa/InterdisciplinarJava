@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,13 +79,33 @@ public class IdeiaDao {
 				
 				// Preencher o comando
 				int i = 1;
+				
+				//private String comandoCreate = "INSERT INTO IDEIA" 
+               // + "(ID, NOME, DESCRICAODOPROBLEMA, RECOMENDACAO, DATACADASTRO,"
+                //+ " DATAANALISE, APROVADO, RESPOSTA, ID_ALUNO,  ID_DEPARTAMENTOSOPET)"
+                //+ "VALUES (IDEIA_SEQ.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				
+				
 				tComandoJdbc.setString(i++, pIdeia.getNome());
 				tComandoJdbc.setString(i++, pIdeia.getDescricaoProblema());
 				tComandoJdbc.setString(i++, pIdeia.getRecomendacao());
 				tComandoJdbc.setDate(i++, Date.valueOf(pIdeia.getDataCadastro()));
-				tComandoJdbc.setDate(i++, Date.valueOf(pIdeia.getDataAnalise()));
-				tComandoJdbc.setBoolean(i++, pIdeia.getAprovado());
-				tComandoJdbc.setString(i++, pIdeia.getResposta());
+				
+				if (pIdeia.getDataAnalise() != null)
+					tComandoJdbc.setDate(i++, Date.valueOf(pIdeia.getDataAnalise()));
+				else 
+					tComandoJdbc.setNull(i++, Types.DATE);
+				
+				if (pIdeia.getAprovado() != null)
+					tComandoJdbc.setString(i++, pIdeia.getAprovado()?"S":"N");
+				else 
+					tComandoJdbc.setNull(i++, Types.CHAR);
+				
+				if (pIdeia.getResposta() != null)
+					tComandoJdbc.setString(i++, pIdeia.getResposta());
+				else
+					tComandoJdbc.setNull(i++, Types.VARCHAR);
+				
 				tComandoJdbc.setInt(i++, pIdeia.getIdAluno());
 				tComandoJdbc.setInt(i++, pIdeia.getIdDepartamentosOpet());
 
@@ -199,16 +220,42 @@ public class IdeiaDao {
 
 				// Preencher o comando
 				int i = 1;
+				
+				/*private String comandoUpdate = "UPDATE IDEIA " 
+	                     + "SET NOME = ?, " 
+	                     + "DESCRICAODOPROBLEMA = ?, " 
+	                     + "RECOMENDACAO = ?, "  
+	                     + "DATACADASTRO = ?, "
+	                     + "DATAANALISE = ?, "
+	                     + "APROVADO = ?, "
+	                     + "RESPOSTA = ?, "
+	                     + "ID_ALUNO = ?, "
+	                     + "ID_DEPARTAMENTOSOPET = ? "
+	                     + "WHERE ID = ? ";*/
 				tComandoJdbc.setString(i++, pIdeia.getNome());
 				tComandoJdbc.setString(i++, pIdeia.getDescricaoProblema());
 				tComandoJdbc.setString(i++, pIdeia.getRecomendacao());
 				tComandoJdbc.setDate(i++, Date.valueOf(pIdeia.getDataCadastro()));
-				tComandoJdbc.setDate(i++, Date.valueOf(pIdeia.getDataAnalise()));
-				tComandoJdbc.setBoolean(i++, pIdeia.getAprovado());
-				tComandoJdbc.setString(i++, pIdeia.getResposta());
+				
+				if (pIdeia.getDataAnalise() != null)
+					tComandoJdbc.setDate(i++, Date.valueOf(pIdeia.getDataAnalise()));
+				else 
+					tComandoJdbc.setNull(i++, Types.DATE);
+				
+				if (pIdeia.getAprovado() != null)
+					tComandoJdbc.setString(i++, pIdeia.getAprovado()?"S":"N");
+				else 
+					tComandoJdbc.setNull(i++, Types.CHAR);
+				
+				if (pIdeia.getResposta() != null)
+					tComandoJdbc.setString(i++, pIdeia.getResposta());
+				else
+					tComandoJdbc.setNull(i++, Types.VARCHAR);
+				
 				tComandoJdbc.setInt(i++, pIdeia.getIdAluno());
 				tComandoJdbc.setInt(i++, pIdeia.getIdDepartamentosOpet());
 				tComandoJdbc.setInt(i++, pIdeia.getId());
+
 
 				// Executar o comando
 				int tQtd = tComandoJdbc.executeUpdate();
@@ -502,15 +549,39 @@ public class IdeiaDao {
 
 		private Ideia recuperarIdeia(ResultSet tResultSet) throws SQLException {
 			Ideia tIdeia = new Ideia();
+			
+			
 
 			tIdeia.setId(tResultSet.getInt("ID"));
 			tIdeia.setNome(tResultSet.getString("NOME"));
 			tIdeia.setDescricaoProblema(tResultSet.getString("DESCRICAODOPROBLEMA"));
 			tIdeia.setRecomendacao(tResultSet.getString("RECOMENDACAO"));
 			tIdeia.setDataCadastro(tResultSet.getDate("DATACADASTRO").toLocalDate());
-			tIdeia.setDataAnalise(tResultSet.getDate("DATAANALISE").toLocalDate());
-			tIdeia.setAprovado(tResultSet.getBoolean("APROVADO"));
-			tIdeia.setResposta(tResultSet.getString("RESPOSTA"));
+			//mostrando que é null
+			Date tDataAnalise = tResultSet.getDate("DATAANALISE");
+	        if (tResultSet.wasNull())
+	            tIdeia.setDataAnalise(null);
+	        else
+	            tIdeia.setDataAnalise(tDataAnalise.toLocalDate());
+	        
+	        
+	        String tAprovado = tResultSet.getString("APROVADO");
+	        if (tResultSet.wasNull())
+	            tIdeia.setAprovado(false);
+	        else
+	            tIdeia.setAprovado(tAprovado.equals("S"));
+	        
+	        
+	        String tReposta = tResultSet.getString("RESPOSTA");
+	        if (tResultSet.wasNull())
+	            tIdeia.setResposta(null);
+	        else
+	            tIdeia.setResposta(tReposta);
+			
+			
+			//tIdeia.setDataAnalise(tResultSet.getDate("DATAANALISE").toLocalDate());
+			//tIdeia.setAprovado(tResultSet.getBoolean("APROVADO"));
+			//tIdeia.setResposta(tResultSet.getString("RESPOSTA"));
 			tIdeia.setIdAluno(tResultSet.getInt("ID_ALUNO"));
 			tIdeia.setIdDepartamentosOpet(tResultSet.getInt("ID_DEPARTAMENTOSOPET"));
 			return tIdeia;

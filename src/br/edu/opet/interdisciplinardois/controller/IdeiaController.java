@@ -1,15 +1,20 @@
 package br.edu.opet.interdisciplinardois.controller;
 
+
 import java.time.LocalDate;
+
 import java.util.ArrayList;
+
 import java.util.List;
 
 import br.edu.opet.interdisciplinardois.dao.AlunoDao;
+
 import br.edu.opet.interdisciplinardois.dao.DepartamentosOpetDao;
 import br.edu.opet.interdisciplinardois.dao.IdeiaDao;
 
 import br.edu.opet.interdisciplinardois.dto.IdeiaDto;
 import br.edu.opet.interdisciplinardois.model.Aluno;
+
 import br.edu.opet.interdisciplinardois.model.DepartamentosOpet;
 import br.edu.opet.interdisciplinardois.model.Ideia;
 
@@ -25,8 +30,10 @@ public class IdeiaController {
 	            return new IdeiaDto(false, "Tentativa de inclusão de ideia nula");
 	        }
 	        //Verificando a data do cadastro
-	        LocalDate tDataAtual = LocalDate.now();
-	        if (pIdeia.getDataCadastro().isBefore(tDataAtual))
+	        //comparar a data apenas 
+	        LocalDate tDataAtual = LocalDate.now(); 
+	       
+	        if  (pIdeia.getDataCadastro().isBefore(tDataAtual))
 	        {
 	            return new IdeiaDto(false, "Data de cadastro anterior a data atual");
 	        }
@@ -196,6 +203,21 @@ public class IdeiaController {
 	        // Retornando o indicativo de sucesso
 	        return new IdeiaDto(true, "Lista de ideias por nome recuperada com sucesso", tLista);
 	    }
+	    
+	    
+	    public IdeiaDto pesquisarIdeia() {
+			// Criando a lista de retorno
+			List<Ideia> tLista = new ArrayList<>();
+
+			// Criando o objeto de persistência
+			IdeiaDao tDao = new IdeiaDao();
+
+			// Recuperando o Venda
+			tLista = tDao.search();
+
+			// Retornando o indicativo de sucesso
+			return new IdeiaDto(true, "Lista de ideias recuperada com sucesso", tLista);
+		}
 
 	}
 

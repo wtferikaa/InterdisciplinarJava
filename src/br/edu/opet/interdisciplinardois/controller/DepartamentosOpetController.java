@@ -146,5 +146,19 @@ public class DepartamentosOpetController {
         // Retornando o indicativo de sucesso
         return new DepartamentosOpetDto(true, "Lista de departamentos recuperada com sucesso", tLista);
     }
+    
+    public DepartamentosOpetDto pesquisarDepartamentosOpet() {
+		// Criando a lista de retorno
+		List<DepartamentosOpet> tLista = new ArrayList<>();
+
+		// Criando o objeto de persistência
+		DepartamentosOpetDao tDao = new DepartamentosOpetDao();
+
+		// Recuperando o Venda
+		tLista = tDao.search();
+
+		// Retornando o indicativo de sucesso
+		return new DepartamentosOpetDto(true, "Lista de departamentos recuperada com sucesso", tLista);
+	}
 
 }

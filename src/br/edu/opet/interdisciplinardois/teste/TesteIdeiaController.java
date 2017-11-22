@@ -195,8 +195,8 @@ public class TesteIdeiaController {
 		tIdeiaB.setDataAnalise(LocalDate.of(2017, 11, 2));
 		tIdeiaB.setAprovado(false);
 		tIdeiaB.setResposta("não gostei");
-		// tIdeiaB.setIdAluno(0);
-		// tIdeiaB.setIdDepartamentosOpet(0);
+		//tIdeiaB.setIdAluno(10);
+		//tIdeiaB.setIdDepartamentosOpet(13);
 
 		System.out.println();
 		System.out.println("Atualizando uma ideia com um nome que já existe");

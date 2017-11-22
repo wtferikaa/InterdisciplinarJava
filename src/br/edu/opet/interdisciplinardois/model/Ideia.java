@@ -82,13 +82,15 @@ public class Ideia {
 	}
 
 
+	
+
 	public LocalDate getDataCadastro() {
 		return dataCadastro;
 	}
 
 
-	public void setDataCadastro(LocalDate pDataCadastro) {
-		 dataCadastro = pDataCadastro;
+	public void setDataCadastro(LocalDate dataCadastro) {
+		this.dataCadastro = dataCadastro;
 	}
 
 
@@ -97,8 +99,8 @@ public class Ideia {
 	}
 
 
-	public void setDataAnalise(LocalDate pDataAnalise) {
-		dataAnalise = pDataAnalise;
+	public void setDataAnalise(LocalDate dataAnalise) {
+		this.dataAnalise = dataAnalise;
 	}
 
 

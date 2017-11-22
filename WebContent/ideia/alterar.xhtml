@@ -20,7 +20,7 @@
 				<h:inputText id="nome" disabled="#{!IdeiaVB.edicao}" value="#{IdeiaVB.nome}" size="50" label="Nome" />
 				
 				<h:outputText value="Descrição do Problema : " disabled="#{!IdeiaVB.edicao}"/> 
-				<h:inputSecret disabled="#{!IdeiaVB.edicao}"  id="descricaoProblema" redisplay="true" value="#{IdeiaVB.descricaoProblema}" size="10" required="true" label="Descrição do Problema" />
+				<h:inputText disabled="#{!IdeiaVB.edicao}"  id="descricaoProblema"  value="#{IdeiaVB.descricaoProblema}" size="100" required="true" label="Descrição do Problema" />
 				
 				<h:outputText value="Recomendação :" disabled="#{!IdeiaVB.edicao}"/> 
 				<h:inputText id="recomendacao" disabled="#{!IdeiaVB.edicao}" value="#{IdeiaVB.nome}" size="50" required="true" label="Recomendação" />
@@ -36,7 +36,7 @@
 				</h:inputText>
 				
 				<h:outputText value="Aprovado :" disabled="#{!IdeiaVB.edicao}"/> 
-				<h:inputText id="aprovado" disabled="#{!IdeiaVB.edicao}" value="#{IdeiaVB.aprovado}" size="15" required="true" label="Aprovado" />
+				<h:selectBooleanCheckbox value="#{IdeiaVB.aprovado}" />
 				
 				<h:outputText value="Resposta :" disabled="#{!IdeiaVB.edicao}"/> 
 				<h:inputText id="resposta" disabled="#{!IdeiaVB.edicao}" value="#{IdeiaVB.resposta}" size="11" required="true" label="Reposta" />
