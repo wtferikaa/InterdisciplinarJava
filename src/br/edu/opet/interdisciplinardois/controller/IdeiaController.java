@@ -191,6 +191,7 @@ public class IdeiaController {
 	    }
 	    public IdeiaDto pesquisarIdeiaPorNome(String pNome)
 	    {
+	    	
 	        // Criando a lista de retorno
 	        List<Ideia> tLista = new ArrayList<>();
 

@@ -17,7 +17,7 @@
                                    ajax="false"/>
             <br/><br/>
             <h:dataTable value="#{IdeiaVB.listaIdeia}" 
-                         var="paciente"
+                         var="ideia"
                          cellpadding="5"
                          styleClass="tabela"
                          headerClass="cabecalho"
@@ -51,8 +51,6 @@
 				        <f:setPropertyActionListener target="#{IdeiaVB.tela}" value="consultar" />
                     </h:commandLink>
                 </h:column>
-               
-                
                 <h:column>
                     <f:facet name="header">Data do Cadastro</f:facet>
                     <h:commandLink action="#{IdeiaVB.consultar}" value="#{ideia.dataCadastro}">
@@ -66,8 +64,7 @@
 				        <f:setPropertyActionListener target="#{IdeiaVB.id}" value="#{ideia.id}" />
 				        <f:setPropertyActionListener target="#{IdeiaVB.tela}" value="consultar" />
                     </h:commandLink>
-                </h:column>
-                
+                </h:column>    
                 <h:column>
                 <f:facet name="header">Aprovado</f:facet>
                     <h:commandLink action="#{IdeiaVB.consultar}" value="#{ideia.aprovado}">
@@ -75,8 +72,6 @@
 				        <f:setPropertyActionListener target="#{IdeiaVB.tela}" value="consultar" />
                     </h:commandLink>
                     </h:column>
-                
-                
                 <h:column>
                 <f:facet name="header">Reposta</f:facet>
                     <h:commandLink action="#{IdeiaVB.consultar}" value="#{ideia.resposta}">
@@ -84,8 +79,8 @@
 				        <f:setPropertyActionListener target="#{IdeiaVB.tela}" value="consultar" />
                     </h:commandLink>
                 </h:column>
-                
                 <h:column>
+                
                     <f:facet name="header">Alterar</f:facet>
                     <h:commandButton value="Alterar" action="#{IdeiaVB.consultar}"
                                      ajax="false">
@@ -93,7 +88,6 @@
 				        <f:setPropertyActionListener target="#{IdeiaVB.tela}" value="alterar" />
 			        </h:commandButton>
                 </h:column>
-                
                 <h:column>
                     <f:facet name="header">Excluir</f:facet>
                     <h:commandButton value="Excluir" action="#{IdeiaVB.consultar}"
