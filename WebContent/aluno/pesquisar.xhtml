@@ -72,21 +72,7 @@
                     </h:commandLink>
                 </h:column>
                 
-                <h:column>
-                    <f:facet name="header">Curso</f:facet>
-                    <h:commandLink action="#{AlunoVB.consultarCurso}" value="#{AlunoVB.mapaCurso.get(aluno.idCurso).nome}">
-				        <f:setPropertyActionListener target="#{AlunoVB.idCurso}" value="#{aluno.idCurso}" />
-				        <f:setPropertyActionListener target="#{AlunoVB.tela}" value="consultar" />
-                    </h:commandLink>
-                </h:column>
-                
-                <h:column>
-                    <f:facet name="header">Nome Coordenador</f:facet>
-                    <h:commandLink action="#{AlunoVB.consultarCurso}" value="#{AlunoVB.mapaCurso.get(aluno.idCurso).nomeCoordenador}">
-				        <f:setPropertyActionListener target="#{AlunoVB.idCurso}" value="#{aluno.idCurso}" />
-				        <f:setPropertyActionListener target="#{AlunoVB.tela}" value="consultar" />
-                    </h:commandLink>
-                </h:column>
+               
                 
                 <h:column>
                     <f:facet name="header">Alterar</f:facet>

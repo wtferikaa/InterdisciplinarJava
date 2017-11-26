@@ -23,7 +23,7 @@
 				<h:inputText disabled="#{!IdeiaVB.edicao}"  id="descricaoProblema"  value="#{IdeiaVB.descricaoProblema}" size="100" required="true" label="Descrição do Problema" />
 				
 				<h:outputText value="Recomendação :" disabled="#{!IdeiaVB.edicao}"/> 
-				<h:inputText id="recomendacao" disabled="#{!IdeiaVB.edicao}" value="#{IdeiaVB.nome}" size="50" required="true" label="Recomendação" />
+				<h:inputText id="recomendacao" disabled="#{!IdeiaVB.edicao}" value="#{IdeiaVB.nome}" size="100" required="true" label="Recomendação" />
 				
 				<h:outputText value="Data de Cadastro :" disabled="#{!IdeiaVB.edicao}"/> 
 				<h:inputText id="dataCadastro" disabled="#{!IdeiaVB.edicao}" value="#{IdeiaVB.dataCadastro}" size="10" required="true" label="Data de Cadastro" >
@@ -39,7 +39,7 @@
 				<h:selectBooleanCheckbox value="#{IdeiaVB.aprovado}" />
 				
 				<h:outputText value="Resposta :" disabled="#{!IdeiaVB.edicao}"/> 
-				<h:inputText id="resposta" disabled="#{!IdeiaVB.edicao}" value="#{IdeiaVB.resposta}" size="11" required="true" label="Reposta" />
+				<h:inputText id="resposta" disabled="#{!IdeiaVB.edicao}" value="#{IdeiaVB.resposta}" size="100" required="true" label="Reposta" />
 				
 			</h:panelGrid>
 			<h:messages errorStyle="color:red;margin:8px;" infoStyle="color:blue;margin:8px;" layout="table"/>
