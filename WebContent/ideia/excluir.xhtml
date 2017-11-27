@@ -20,10 +20,10 @@
 				<h:inputText id="nome" disabled="true" value="#{IdeiaVB.nome}" size="50" label="Nome" />
 				
 				<h:outputText value="Descrição do Problema : " disabled="true"/> 
-				<h:inputSecret disabled="true"  id="descricaoProblema" redisplay="true" value="#{IdeiaVB.descricaoProblema}" size="10" required="true" label="Descricao Problema" />
+				<h:inputText disabled="true"  id="descricaoProblema" redisplay="true" value="#{IdeiaVB.descricaoProblema}" size="100" required="true" label="Descricao Problema" />
 				
 				<h:outputText value="Recomendação :" disabled="true"/> 
-				<h:inputText id="recomendacao" disabled="true" value="#{IdeiaVB.recomendacao}" size="50" required="true" label="Recomendação" />
+				<h:inputText id="recomendacao" disabled="true" value="#{IdeiaVB.recomendacao}" size="100" required="true" label="Recomendação" />
 				
 				<h:outputText value="Data de Cadastro :" disabled="true"/> 
 				<h:inputText id="dataCadastro" disabled="true" value="#{IdeiaVB.dataCadastro}" size="10" required="true" label="Data de Cadastro" >
@@ -37,10 +37,10 @@
 				
 				
 				<h:outputText value="Aprovado :" disabled="true"/> 
-				<h:inputText id="aprovado" disabled="true" value="#{IdeiaVB.aprovado}" size="15" required="true" label="Aprovado" />
+				<h:selectBooleanCheckbox value="#{IdeiaVB.aprovado}" />
 				
 				<h:outputText value="Resposta :" disabled="true"/> 
-				<h:inputText id="resposta" disabled="true" value="#{IdeiaVB.resposta}" size="11" required="true" label="Resposta" />
+				<h:inputText id="resposta" disabled="true" value="#{IdeiaVB.resposta}" size="100" required="true" label="Resposta" />
 				
 			</h:panelGrid>
 			<h:messages errorStyle="color:red;margin:8px;" infoStyle="color:blue;margin:8px;" layout="table"/>

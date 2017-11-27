@@ -4,7 +4,7 @@
 
 .cabecalho{
 	text-align:center;
-	background:none repeat scroll 0 0 #3300FF;
+	background:none repeat scroll 0  0 #ff0000;
 	color : #FFFFFF;
 	border-bottom:1px solid #BBBBBB;
 	border-left:1px solid #BBBBBB;
@@ -14,11 +14,11 @@
 .linha-impar{
 	text-align:left;
 	background:none repeat scroll 0 0 #FFFFFFF;
-	border:1px solid #BBBBBB;
+	border:1px solid #671500;
 }
 
 .linha-par{
 	text-align:left;
-	background:none repeat scroll 0 0 #99FFFF;
-	border:1px solid #BBBBBB;
+	background:none repeat scroll 0 0 #ff0000;
+	border:1px solid #ffb38f;
 }

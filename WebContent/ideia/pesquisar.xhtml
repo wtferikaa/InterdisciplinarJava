@@ -38,14 +38,14 @@
                     </h:commandLink>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Descricao do Problema</f:facet>
+                    <f:facet name="header">Descrição do Problema</f:facet>
                     <h:commandLink action="#{IdeiaVB.consultar}" value="#{ideia.descricaoProblema}">
 				        <f:setPropertyActionListener target="#{IdeiaVB.id}" value="#{ideia.id}" />
 				        <f:setPropertyActionListener target="#{IdeiaVB.tela}" value="consultar" />
                     </h:commandLink>
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Recomendacao</f:facet>
+                    <f:facet name="header">Recomendação</f:facet>
                     <h:commandLink action="#{IdeiaVB.consultar}" value="#{ideia.recomendacao}">
 				        <f:setPropertyActionListener target="#{IdeiaVB.id}" value="#{ideia.id}" />
 				        <f:setPropertyActionListener target="#{IdeiaVB.tela}" value="consultar" />
@@ -59,13 +59,15 @@
                     </h:commandLink>
                 </h:column>
                 <h:column>
-                <f:facet name="header">Data de Analise</f:facet>
+                <f:facet name="header">Data de Análise</f:facet>
                     <h:commandLink action="#{IdeiaVB.consultar}" value="#{ideia.dataAnalise}">
 				        <f:setPropertyActionListener target="#{IdeiaVB.id}" value="#{ideia.id}" />
 				        <f:setPropertyActionListener target="#{IdeiaVB.tela}" value="consultar" />
                     </h:commandLink>
                 </h:column>    
                 <h:column>
+                
+                
                 <f:facet name="header">Aprovado</f:facet>
                     <h:commandLink action="#{IdeiaVB.consultar}" value="#{ideia.aprovado}">
 				        <f:setPropertyActionListener target="#{IdeiaVB.id}" value="#{ideia.id}" />
