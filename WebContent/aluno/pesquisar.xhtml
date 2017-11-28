@@ -1,99 +1,144 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
 
-    <h:head>
-        <link rel="StyleSheet" type="text/css" href="../../css/projeto.css" media="screen" />
-    </h:head>
-    <body> 
-        <h2>Pesquisa de Alunos</h2>
-        <h:form id="inclusaoAluno">
+<h:head>
+	<link rel="StyleSheet" type="text/css" href="../../css/projeto.css"
+		media="screen" />
+
+	<style type="text/css">
+.tabela {
+	border-collapse: collapse;
+}
+
+.cabecalho {
+	text-align: center;
+	background: none repeat scroll 0 0 #671500;
+	color: #FFFFFF;
+	border-bottom: 1px solid #BBBBBB;
+	border-left: 1px solid #BBBBBB;
+	padding: 5px;
+}
+
+.linha-impar {
+	text-align: left;
+	background: none repeat scroll 0 0 #FFFFFFF;
+	border: 1px solid #671500;
+}
+
+.linha-par {
+	text-align: left;
+	background: none repeat scroll 0 0 #ffb38f;
+	border: 1px solid #ffb38f;
+}
+</style>
+
+</h:head>
+<body>
+	<h2>Pesquisa de Alunos</h2>
+	<h:form id="inclusaoAluno">
             Nome : 
-            <h:inputText id="nome" value="#{AlunoVB.nome}" size="50" label="Nome" />
+            <h:inputText id="nome" value="#{AlunoVB.nome}" size="50"
+			label="Nome" />
             &nbsp;
-            <h:commandButton value="Pesquisar" action="#{AlunoVB.pesquisar}"
-                                   ajax="false"/>
-            <br/><br/>
-            <h:dataTable value="#{AlunoVB.listaAluno}" 
-                         var="aluno"
-                         cellpadding="5"
-                         styleClass="tabela"
-                         headerClass="cabecalho"
-                         rowClasses="linha-impar,linha-par"
-                         width="100%">
-                <h:column>
-                    <f:facet name="header">Id.</f:facet>
-                    <h:commandLink action="#{AlunoVB.consultar}" value="#{aluno.id}">
-				        <f:setPropertyActionListener target="#{AlunoVB.id}" value="#{aluno.id}" />
-				        <f:setPropertyActionListener target="#{AlunoVB.tela}" value="consultar" />
-                    </h:commandLink>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">E-mail</f:facet>
-                    <h:commandLink action="#{AlunoVB.consultar}" value="#{aluno.email}">
-				        <f:setPropertyActionListener target="#{AlunoVB.id}" value="#{aluno.id}" />
-				        <f:setPropertyActionListener target="#{AlunoVB.tela}" value="consultar" />
-                    </h:commandLink>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Nome</f:facet>
-                    <h:commandLink action="#{AlunoVB.consultar}" value="#{aluno.nome}">
-				        <f:setPropertyActionListener target="#{AlunoVB.id}" value="#{aluno.id}" />
-				        <f:setPropertyActionListener target="#{AlunoVB.tela}" value="consultar" />
-                    </h:commandLink>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Telefone</f:facet>
-                    <h:commandLink action="#{AlunoVB.consultar}" value="#{aluno.telefone}">
-				        <f:setPropertyActionListener target="#{AlunoVB.id}" value="#{aluno.id}" />
-				        <f:setPropertyActionListener target="#{AlunoVB.tela}" value="consultar" />
-                    </h:commandLink>
-                </h:column>
-                <h:column>
-                
-                 </h:column>
-                <h:column>
-                    <f:facet name="header">Turno</f:facet>
-                    <h:commandLink action="#{AlunoVB.consultar}" value="#{aluno.turno}">
-				        <f:setPropertyActionListener target="#{AlunoVB.id}" value="#{aluno.id}" />
-				        <f:setPropertyActionListener target="#{AlunoVB.tela}" value="consultar" />
-                    </h:commandLink>
-                </h:column>
-                <h:column>
-                
-                 </h:column>
-                <h:column>
-                    <f:facet name="header">Turma</f:facet>
-                    <h:commandLink action="#{AlunoVB.consultar}" value="#{aluno.turma}">
-				        <f:setPropertyActionListener target="#{AlunoVB.id}" value="#{aluno.id}" />
-				        <f:setPropertyActionListener target="#{AlunoVB.tela}" value="consultar" />
-                    </h:commandLink>
-                </h:column>
-                
-               
-                
-                <h:column>
-                    <f:facet name="header">Alterar</f:facet>
-                    <h:commandButton value="Alterar" action="#{AlunoVB.consultar}"
-                                     ajax="false">
-				        <f:setPropertyActionListener target="#{AlunoVB.id}" value="#{aluno.id}" />
-				        <f:setPropertyActionListener target="#{AlunoVB.tela}" value="alterar" />
-			        </h:commandButton>
-                </h:column>
-                <h:column>
-                    <f:facet name="header">Excluir</f:facet>
-                    <h:commandButton value="Excluir" action="#{AlunoVB.consultar}"
-                                     ajax="false">
-				        <f:setPropertyActionListener target="#{AlunoVB.id}" value="#{aluno.id}" />
-				        <f:setPropertyActionListener target="#{AlunoVB.tela}" value="excluir" />
-			        </h:commandButton>
-                </h:column>
-            </h:dataTable>        
-            <h:messages errorStyle="color:red;margin:8px;" infoStyle="color:blue;margin:8px;" layout="table"/>
-			<br/>
-            <h:commandButton value="Home" action="/index" immediate="true"/>
-        </h:form>
-    </body> 
+            <h:commandButton value="Pesquisar"
+			action="#{AlunoVB.pesquisar}" ajax="false" />
+		<br />
+		<br />
+		<h:dataTable value="#{AlunoVB.listaAluno}" var="aluno" cellpadding="5"
+			styleClass="tabela" headerClass="cabecalho"
+			rowClasses="linha-impar,linha-par" width="100%">
+			<h:column>
+				<f:facet name="header">Id.</f:facet>
+				<h:commandLink action="#{AlunoVB.consultar}" value="#{aluno.id}">
+					<f:setPropertyActionListener target="#{AlunoVB.id}"
+						value="#{aluno.id}" />
+					<f:setPropertyActionListener target="#{AlunoVB.tela}"
+						value="consultar" />
+				</h:commandLink>
+			</h:column>
+			<h:column>
+				<f:facet name="header">E-mail</f:facet>
+				<h:commandLink action="#{AlunoVB.consultar}" value="#{aluno.email}">
+					<f:setPropertyActionListener target="#{AlunoVB.id}"
+						value="#{aluno.id}" />
+					<f:setPropertyActionListener target="#{AlunoVB.tela}"
+						value="consultar" />
+				</h:commandLink>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Nome</f:facet>
+				<h:commandLink action="#{AlunoVB.consultar}" value="#{aluno.nome}">
+					<f:setPropertyActionListener target="#{AlunoVB.id}"
+						value="#{aluno.id}" />
+					<f:setPropertyActionListener target="#{AlunoVB.tela}"
+						value="consultar" />
+				</h:commandLink>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Telefone</f:facet>
+				<h:commandLink action="#{AlunoVB.consultar}"
+					value="#{aluno.telefone}">
+					<f:setPropertyActionListener target="#{AlunoVB.id}"
+						value="#{aluno.id}" />
+					<f:setPropertyActionListener target="#{AlunoVB.tela}"
+						value="consultar" />
+				</h:commandLink>
+			</h:column>
+			<h:column>
+
+			</h:column>
+			<h:column>
+				<f:facet name="header">Turno</f:facet>
+				<h:commandLink action="#{AlunoVB.consultar}" value="#{aluno.turno}">
+					<f:setPropertyActionListener target="#{AlunoVB.id}"
+						value="#{aluno.id}" />
+					<f:setPropertyActionListener target="#{AlunoVB.tela}"
+						value="consultar" />
+				</h:commandLink>
+			</h:column>
+			<h:column>
+
+			</h:column>
+			<h:column>
+				<f:facet name="header">Turma</f:facet>
+				<h:commandLink action="#{AlunoVB.consultar}" value="#{aluno.turma}">
+					<f:setPropertyActionListener target="#{AlunoVB.id}"
+						value="#{aluno.id}" />
+					<f:setPropertyActionListener target="#{AlunoVB.tela}"
+						value="consultar" />
+				</h:commandLink>
+			</h:column>
+
+			
+
+			<h:column>
+				<f:facet name="header">Alterar</f:facet>
+				<h:commandButton value="Alterar" action="#{AlunoVB.consultar}"
+					ajax="false">
+					<f:setPropertyActionListener target="#{AlunoVB.id}"
+						value="#{aluno.id}" />
+					<f:setPropertyActionListener target="#{AlunoVB.tela}"
+						value="alterar" />
+				</h:commandButton>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Excluir</f:facet>
+				<h:commandButton value="Excluir" action="#{AlunoVB.consultar}"
+					ajax="false">
+					<f:setPropertyActionListener target="#{AlunoVB.id}"
+						value="#{aluno.id}" />
+					<f:setPropertyActionListener target="#{AlunoVB.tela}"
+						value="excluir" />
+				</h:commandButton>
+			</h:column>
+		</h:dataTable>
+		<h:messages errorStyle="color:red;margin:8px;"
+			infoStyle="color:blue;margin:8px;" layout="table" />
+		<br />
+		<h:commandButton value="Home" action="/index" immediate="true" />
+	</h:form>
+</body>
 </html>
