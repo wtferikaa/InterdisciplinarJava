@@ -38,225 +38,188 @@ public class AlunoJavaBean {
 	private String tela;
 	private List<Aluno> listaAluno;
 	private List<Curso> listaCurso;
-	private Map< Integer, Curso> mapaCurso;
-	
-	
+	private Map<Integer, Curso> mapaCurso;
 
 	public Integer getId() {
 		return id;
 	}
 
-
 	public void setId(Integer pId) {
 		id = pId;
 	}
-
 
 	public String getEmail() {
 		return email;
 	}
 
-
 	public void setEmail(String pEmail) {
 		email = pEmail;
 	}
-
 
 	public String getSenha() {
 		return senha;
 	}
 
-
 	public void setSenha(String pSenha) {
 		senha = pSenha;
 	}
-
 
 	public String getNome() {
 		return nome;
 	}
 
-
 	public void setNome(String pNome) {
 		nome = pNome;
 	}
-
 
 	public Long getTelefone() {
 		return telefone;
 	}
 
-
 	public void setTelefone(Long pTelefone) {
 		telefone = pTelefone;
 	}
-
 
 	public String getTurno() {
 		return turno;
 	}
 
-
 	public void setTurno(String pTurno) {
 		turno = pTurno;
 	}
-
 
 	public String getTurma() {
 		return turma;
 	}
 
-
 	public void setTurma(String pTurma) {
 		turma = pTurma;
 	}
-
 
 	public Integer getIdCurso() {
 		return idCurso;
 	}
 
-
 	public void setIdCurso(Integer pIdCurso) {
 		idCurso = pIdCurso;
 	}
-
 
 	public String getNomeCurso() {
 		return nomeCurso;
 	}
 
-
 	public void setNomeCurso(String pNomeCurso) {
 		nomeCurso = pNomeCurso;
 	}
-
 
 	public String getNomeCoordenador() {
 		return nomeCoordenador;
 	}
 
-
 	public void setNomeCoordenador(String pNomeCoordenador) {
 		nomeCoordenador = pNomeCoordenador;
 	}
-
 
 	public boolean isEdicaoCurso() {
 		return edicaoCurso;
 	}
 
-
 	public void setEdicaoCurso(boolean pEdicaoCurso) {
 		edicaoCurso = pEdicaoCurso;
 	}
-
 
 	public boolean isEdicao() {
 		return edicao;
 	}
 
-
 	public void setEdicao(boolean pEdicao) {
 		edicao = pEdicao;
 	}
-
 
 	public String getTela() {
 		return tela;
 	}
 
-
 	public void setTela(String pTela) {
 		tela = pTela;
 	}
-
 
 	public List<Aluno> getListaAluno() {
 		return listaAluno;
 	}
 
-
 	public void setListaAluno(List<Aluno> pListaAluno) {
 		listaAluno = pListaAluno;
 	}
-
 
 	public List<Curso> getListaCurso() {
 		return listaCurso;
 	}
 
-
 	public void setListaCurso(List<Curso> pListaCurso) {
 		listaCurso = pListaCurso;
 	}
-
 
 	public Map<Integer, Curso> getMapaCurso() {
 		return mapaCurso;
 	}
 
-
 	public void setMapaCurso(Map<Integer, Curso> mapaCurso) {
 		this.mapaCurso = mapaCurso;
 	}
-
 
 	@PostConstruct
 	public void init() {
 		Aluno tAluno = (Aluno) FacesContext.getCurrentInstance().getExternalContext().getRequestMap().get("ALUNO");
 		if (tAluno != null) {
-			
+
 			id = tAluno.getId();
+			email = tAluno.getEmail();
+			senha = tAluno.getSenha();
+			nome = tAluno.getNome();
+			telefone = tAluno.getTelefone();
+			turno = tAluno.getTurno();
+			turma = tAluno.getTurma();
 			idCurso = tAluno.getIdCurso();
 
 			CursoController tCursoController = new CursoController();
 
 			CursoDto tCursoDto = tCursoController.recuperarCurso(getIdCurso());
 			if (tCursoDto.isOk()) {
-				
+
 				Curso tCurso = tCursoDto.getCurso();
 				nomeCurso = tCurso.getNome();
 				nomeCoordenador = tCurso.getNomeCoordenador();
-			} 
-			else {
+			} else {
 				nomeCoordenador = null;
 				nomeCurso = null;
 			}
 
-			
-			 edicao = true;
-			 edicaoCurso = true;
+			edicao = true;
+			edicaoCurso = true;
 
 		}
-	
-		
+
 		CursoController tController = new CursoController();
 
-        CursoDto tDto = tController.pesquisarCurso();
-        if (tDto.isOk())
-        {
-            // Ok, recuperado
-            listaCurso = tDto.getLista(); 
-            mapaCurso = new Hashtable<>();
-            for (Curso tCurso : listaCurso) {
-            	mapaCurso.put(tCurso.getId(), tCurso);
-				
-			}
-            
-        }
-        else
-        {
-            // Colocando a mensagem do sistema
-            FacesContext.getCurrentInstance().addMessage(null,
-                            new FacesMessage(FacesMessage.SEVERITY_ERROR, tDto.getMensagem(), tDto.getMensagem()));
-        }
-		
-		
-	
-}
+		CursoDto tDto = tController.pesquisarCurso();
+		if (tDto.isOk()) {
+			// Ok, recuperado
+			listaCurso = tDto.getLista();
+			mapaCurso = new Hashtable<>();
+			for (Curso tCurso : listaCurso) {
+				mapaCurso.put(tCurso.getId(), tCurso);
 
-	
+			}
+
+		} else {
+			// Colocando a mensagem do sistema
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, tDto.getMensagem(), tDto.getMensagem()));
+		}
+
+	}
+
 	// Métodos da Controller
 	public String limpar() {
 		id = null;
@@ -270,52 +233,43 @@ public class AlunoJavaBean {
 		nomeCurso = null;
 		nomeCoordenador = null;
 		edicao = false;
-		//edicaoCurso = false;
+		edicaoCurso = false;
 
 		return tela;
 	}
 
-	public String cadastrar()
-    {
-        System.out.println("AlunoVB - Cadastrar : " + this);
+	public String cadastrar() {
+		System.out.println("AlunoVB - Cadastrar : " + this);
 
-        Aluno tAluno = new Aluno();
-        tAluno.setEmail(email);
-        tAluno.setSenha(senha);
-        tAluno.setNome(nome);
-        tAluno.setTelefone(telefone);
-        tAluno.setTurno(turno);
-        tAluno.setTurma(turma);
-        tAluno.setIdCurso(idCurso);
-       
-        
+		Aluno tAluno = new Aluno();
+		tAluno.setEmail(email);
+		tAluno.setSenha(senha);
+		tAluno.setNome(nome);
+		tAluno.setTelefone(telefone);
+		tAluno.setTurno(turno);
+		tAluno.setTurma(turma);
+		tAluno.setIdCurso(idCurso);
 
-        AlunoController tController = new AlunoController();
-        
+		AlunoController tController = new AlunoController();
 
-       
-        AlunoDto tDto = tController.criarAluno(tAluno);
-      
-        if (tDto.isOk())
-        {
-            // Ok, incluído
-            id = tDto.getAluno().getId();
-            
+		AlunoDto tDto = tController.criarAluno(tAluno);
 
-            // Colocando a mensagem do sistema
-            FacesContext.getCurrentInstance().addMessage(null,
-                            new FacesMessage(FacesMessage.SEVERITY_INFO, tDto.getMensagem(), tDto.getMensagem()));
-        }
-        else
-        {
-            // Erro de inclusão
+		if (tDto.isOk()) {
+			// Ok, incluído
+			id = tDto.getAluno().getId();
 
-            // Colocando a mensagem do sistema
-            FacesContext.getCurrentInstance().addMessage(null,
-                            new FacesMessage(FacesMessage.SEVERITY_ERROR, tDto.getMensagem(), tDto.getMensagem()));
-        }
-        return null;
-    }
+			// Colocando a mensagem do sistema
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, tDto.getMensagem(), tDto.getMensagem()));
+		} else {
+			// Erro de inclusão
+
+			// Colocando a mensagem do sistema
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, tDto.getMensagem(), tDto.getMensagem()));
+		}
+		return null;
+	}
 
 	public String alterar() {
 		System.out.println("AlunoVB - Alterar : " + this);
@@ -331,7 +285,6 @@ public class AlunoJavaBean {
 		tAluno.setIdCurso(idCurso);
 
 		AlunoController tController = new AlunoController();
-		
 
 		AlunoDto tDto = tController.atualizarAluno(tAluno);
 		if (tDto.isOk()) {
@@ -355,7 +308,7 @@ public class AlunoJavaBean {
 		System.out.println("AlunoVB - Consultar : " + this);
 
 		AlunoController tController = new AlunoController();
-
+		
 		AlunoDto tDto = tController.recuperarAluno(id);
 		if (tDto.isOk()) {
 			// Ok, recuperado
@@ -370,21 +323,27 @@ public class AlunoJavaBean {
 			idCurso = tAluno.getIdCurso();
 			
 			
-	            // Ok, recuperado
-	            nomeCoordenador = mapaCurso.get(idCurso).getNomeCoordenador();
-	            nomeCurso = mapaCurso.get(idCurso).getNome();
-	           
-	        
 			
+			//Curso tCurso = tCursoDto.getCurso();
+            //idCurso = tCurso.getId();
+            //nomeCurso = tCurso.getNome();
+            //nomeCoordenador = tCurso.getNomeCoordenador();
+
+			//Ok, recuperado o curso
+			idCurso = mapaCurso.get(idCurso).getId();
+			nomeCoordenador = mapaCurso.get(idCurso).getNomeCoordenador();
+			nomeCurso = mapaCurso.get(idCurso).getNome();
 
 			// indicando que a pesquisa deu certo
 			edicao = true;
+			
 
 			// Passando o obejto para outra instância de ViewBean, se necessário
-			FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("Aluno", tAluno);
+			FacesContext.getCurrentInstance().getExternalContext().getRequestMap().put("ALUNO", tAluno);
 		} else {
 			// Erro de consulta
 			edicao = false;
+			
 
 			// Colocando a mensagem do sistema
 			FacesContext.getCurrentInstance().addMessage(null,
@@ -394,23 +353,19 @@ public class AlunoJavaBean {
 		return tela;
 	}
 
-	
-	 public void consultarCurso(ValueChangeEvent pEvento)
-	    {
-	        System.out.println("AlunoVB - consultarCurso : " + this);
-	        
-	        idCurso = Integer.parseInt(pEvento.getNewValue().toString());
-	        
-	        System.out.println("ID DO CURSO : " + idCurso);
-	        
-	      // Ok, recuperado
-            nomeCoordenador = mapaCurso.get(idCurso).getNomeCoordenador();
-            nomeCurso = mapaCurso.get(idCurso).getNome();
-            
-	        
-	    }
-	 
-	 
+	public void consultarCurso(ValueChangeEvent pEvento) {
+		System.out.println("AlunoVB - consultarCurso : " + this);
+
+		idCurso = Integer.parseInt(pEvento.getNewValue().toString());
+
+		System.out.println("ID DO CURSO : " + idCurso);
+
+		// Ok, recuperado
+		idCurso = mapaCurso.get(idCurso).getId();
+		nomeCoordenador = mapaCurso.get(idCurso).getNomeCoordenador();
+		nomeCurso = mapaCurso.get(idCurso).getNome();
+
+	}
 
 	public String excluir() {
 		System.out.println("AlunoVB - Excluir : " + this);
@@ -444,15 +399,23 @@ public class AlunoJavaBean {
 	public String pesquisar() {
 		System.out.println("AlunoVB - Pesquisar : " + this);
 
+		
 		AlunoController tController = new AlunoController();
-
+		
 		AlunoDto tDto = tController.pesquisarAlunosPorNome(nome);
 		if (tDto.isOk()) {
 			// Ok, recuperado
 			listaAluno = tDto.getLista();
-		} 
+			
+		}
 		
+		CursoController tCursoController = new CursoController();
+
+		CursoDto tCursoDto = tCursoController.pesquisarCursoPorNome(nome);
 		
+		if (tCursoDto.isOk()) {
+			listaCurso = tCursoDto.getLista();
+		}
 
 		return null;
 	}
@@ -463,12 +426,6 @@ public class AlunoJavaBean {
 		StringBuilder tBuilder = new StringBuilder();
 		tBuilder.append(" [");
 		tBuilder.append(id);
-		tBuilder.append(", ");
-		tBuilder.append(idCurso);
-		tBuilder.append(", ");
-		tBuilder.append("nomeCurso");
-		tBuilder.append(", ");
-		tBuilder.append("nomeCoordenador");
 		tBuilder.append(", ");
 		tBuilder.append(email);
 		tBuilder.append(", ");
@@ -481,6 +438,12 @@ public class AlunoJavaBean {
 		tBuilder.append(turno);
 		tBuilder.append(", ");
 		tBuilder.append(turma);
+		tBuilder.append(", ");
+		tBuilder.append(idCurso);
+		tBuilder.append(", ");
+		tBuilder.append("nomeCurso");
+		tBuilder.append(", ");
+		tBuilder.append("nomeCoordenador");
 		tBuilder.append("]");
 		return tBuilder.toString();
 	}

@@ -40,51 +40,43 @@
 	<h2>Pesquisa de Alunos</h2>
 	<h:form id="inclusaoAluno">
             Nome : 
-            <h:inputText id="nome" value="#{AlunoVB.nome}" size="50"
-			label="Nome" />
+            <h:inputText id="nome" value="#{AlunoVB.nome}" size="50" label="Nome" />
             &nbsp;
-            <h:commandButton value="Pesquisar"
-			action="#{AlunoVB.pesquisar}" ajax="false" />
-		<br />
-		<br />
-		<h:dataTable value="#{AlunoVB.listaAluno}" var="aluno" cellpadding="5"
-			styleClass="tabela" headerClass="cabecalho"
-			rowClasses="linha-impar,linha-par" width="100%">
+            <h:commandButton value="Pesquisar" action="#{AlunoVB.pesquisar}" ajax="false" />
+		<br /><br />
+		<h:dataTable value="#{AlunoVB.listaAluno}" 
+		var="aluno" 
+		cellpadding="5"
+			styleClass="tabela"
+			 headerClass="cabecalho"
+			rowClasses="linha-impar,linha-par" 
+			width="100%">
 			<h:column>
 				<f:facet name="header">Id.</f:facet>
 				<h:commandLink action="#{AlunoVB.consultar}" value="#{aluno.id}">
-					<f:setPropertyActionListener target="#{AlunoVB.id}"
-						value="#{aluno.id}" />
-					<f:setPropertyActionListener target="#{AlunoVB.tela}"
-						value="consultar" />
+					<f:setPropertyActionListener target="#{AlunoVB.id}" value="#{aluno.id}" />
+					<f:setPropertyActionListener target="#{AlunoVB.tela}" value="consultar" />
 				</h:commandLink>
 			</h:column>
 			<h:column>
 				<f:facet name="header">E-mail</f:facet>
 				<h:commandLink action="#{AlunoVB.consultar}" value="#{aluno.email}">
-					<f:setPropertyActionListener target="#{AlunoVB.id}"
-						value="#{aluno.id}" />
-					<f:setPropertyActionListener target="#{AlunoVB.tela}"
-						value="consultar" />
+					<f:setPropertyActionListener target="#{AlunoVB.id}" value="#{aluno.id}" />
+					<f:setPropertyActionListener target="#{AlunoVB.tela}" value="consultar" />
 				</h:commandLink>
 			</h:column>
 			<h:column>
 				<f:facet name="header">Nome</f:facet>
 				<h:commandLink action="#{AlunoVB.consultar}" value="#{aluno.nome}">
-					<f:setPropertyActionListener target="#{AlunoVB.id}"
-						value="#{aluno.id}" />
-					<f:setPropertyActionListener target="#{AlunoVB.tela}"
-						value="consultar" />
+					<f:setPropertyActionListener target="#{AlunoVB.id}" value="#{aluno.id}" />
+					<f:setPropertyActionListener target="#{AlunoVB.tela}" value="consultar" />
 				</h:commandLink>
 			</h:column>
 			<h:column>
 				<f:facet name="header">Telefone</f:facet>
-				<h:commandLink action="#{AlunoVB.consultar}"
-					value="#{aluno.telefone}">
-					<f:setPropertyActionListener target="#{AlunoVB.id}"
-						value="#{aluno.id}" />
-					<f:setPropertyActionListener target="#{AlunoVB.tela}"
-						value="consultar" />
+				<h:commandLink action="#{AlunoVB.consultar}" value="#{aluno.telefone}">
+					<f:setPropertyActionListener target="#{AlunoVB.id}" value="#{aluno.id}" />
+					<f:setPropertyActionListener target="#{AlunoVB.tela}" value="consultar" />
 				</h:commandLink>
 			</h:column>
 			<h:column>
@@ -93,10 +85,8 @@
 			<h:column>
 				<f:facet name="header">Turno</f:facet>
 				<h:commandLink action="#{AlunoVB.consultar}" value="#{aluno.turno}">
-					<f:setPropertyActionListener target="#{AlunoVB.id}"
-						value="#{aluno.id}" />
-					<f:setPropertyActionListener target="#{AlunoVB.tela}"
-						value="consultar" />
+					<f:setPropertyActionListener target="#{AlunoVB.id}" value="#{aluno.id}" />
+					<f:setPropertyActionListener target="#{AlunoVB.tela}" value="consultar" />
 				</h:commandLink>
 			</h:column>
 			<h:column>
@@ -105,33 +95,25 @@
 			<h:column>
 				<f:facet name="header">Turma</f:facet>
 				<h:commandLink action="#{AlunoVB.consultar}" value="#{aluno.turma}">
-					<f:setPropertyActionListener target="#{AlunoVB.id}"
-						value="#{aluno.id}" />
-					<f:setPropertyActionListener target="#{AlunoVB.tela}"
-						value="consultar" />
+					<f:setPropertyActionListener target="#{AlunoVB.id}" value="#{aluno.id}" />
+					<f:setPropertyActionListener target="#{AlunoVB.tela}" value="consultar" />
 				</h:commandLink>
 			</h:column>
-
-			
 
 			<h:column>
 				<f:facet name="header">Alterar</f:facet>
 				<h:commandButton value="Alterar" action="#{AlunoVB.consultar}"
 					ajax="false">
-					<f:setPropertyActionListener target="#{AlunoVB.id}"
-						value="#{aluno.id}" />
-					<f:setPropertyActionListener target="#{AlunoVB.tela}"
-						value="alterar" />
+					<f:setPropertyActionListener target="#{AlunoVB.id}" value="#{aluno.id}" />
+					<f:setPropertyActionListener target="#{AlunoVB.tela}" value="alterar" />
 				</h:commandButton>
 			</h:column>
 			<h:column>
 				<f:facet name="header">Excluir</f:facet>
 				<h:commandButton value="Excluir" action="#{AlunoVB.consultar}"
 					ajax="false">
-					<f:setPropertyActionListener target="#{AlunoVB.id}"
-						value="#{aluno.id}" />
-					<f:setPropertyActionListener target="#{AlunoVB.tela}"
-						value="excluir" />
+					<f:setPropertyActionListener target="#{AlunoVB.id}" value="#{aluno.id}" />
+					<f:setPropertyActionListener target="#{AlunoVB.tela}" value="excluir" />
 				</h:commandButton>
 			</h:column>
 		</h:dataTable>

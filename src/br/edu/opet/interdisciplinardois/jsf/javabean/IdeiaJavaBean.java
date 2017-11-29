@@ -62,7 +62,11 @@ public class IdeiaJavaBean {
 			descricaoProblema = tIdeia.getDescricaoProblema();
 			recomendacao = tIdeia.getRecomendacao();
 			dataCadastro = java.sql.Date.valueOf(tIdeia.getDataCadastro());
+			if (tIdeia.getDataAnalise() != null) {
 			dataAnalise = java.sql.Date.valueOf(tIdeia.getDataAnalise());
+			}
+			else dataAnalise = null;
+			
 			aprovado = tIdeia.getAprovado();
 			resposta = tIdeia.getResposta();
 			edicao = true;
@@ -517,11 +521,14 @@ public class IdeiaJavaBean {
 		if (tDto.isOk()) {
 			// Ok, recuperado
 			listaIdeia = tDto.getLista();
+			
 		} else {
 			// Colocando a mensagem do sistema
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, tDto.getMensagem(), tDto.getMensagem()));
 		}
+		
+		
 
 		return null;
 	}
